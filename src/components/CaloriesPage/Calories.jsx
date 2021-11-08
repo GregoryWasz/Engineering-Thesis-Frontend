@@ -1,7 +1,14 @@
-import { Container, CssBaseline, Paper } from "@mui/material";
+import {
+    Button,
+    Container,
+    CssBaseline,
+    Paper,
+    Typography,
+} from "@mui/material";
 import Grid from "@mui/material/Grid";
 import { Box } from "@mui/system";
 import React from "react";
+import CaloriesTable from "./CaloriesTable";
 
 export default function Forum() {
     return (
@@ -16,11 +23,24 @@ export default function Forum() {
                                     p: 2,
                                     display: "flex",
                                     flexDirection: "column",
-                                    height: 55,
                                 }}
                             >
-                                TODO: CALORIES Buttons and Datepicker
+                                <Typography
+                                    variant="h5"
+                                    sx={{ textAlign: "center" }}
+                                >
+                                    Select date: TODO Datepicker
+                                </Typography>
+                                <Button
+                                    sx={{ p: 1, mt: 1 }}
+                                    variant="contained"
+                                >
+                                    Add new product
+                                </Button>
                             </Paper>
+                        </Grid>
+                        <Grid item xs={12} md={12} lg={12}>
+                            <CaloriesTable />
                         </Grid>
                         <Grid item xs={12} md={12} lg={12}>
                             <Paper
@@ -28,22 +48,14 @@ export default function Forum() {
                                     p: 2,
                                     display: "flex",
                                     flexDirection: "column",
-                                    height: 240,
                                 }}
                             >
-                                TODO: Table of contents
-                            </Paper>
-                        </Grid>
-                        <Grid item xs={12} md={12} lg={12}>
-                            <Paper
-                                sx={{
-                                    p: 2,
-                                    display: "flex",
-                                    flexDirection: "column",
-                                    height: 55,
-                                }}
-                            >
-                                TODO: Resume of this day
+                                <Typography variant="h5">Resume</Typography>
+                                <Typography>
+                                    You eaten {600} of {1500} your daily
+                                    Calories
+                                </Typography>
+                                <Typography>Good Luck!</Typography>
                             </Paper>
                         </Grid>
                     </Grid>

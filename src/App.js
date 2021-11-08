@@ -5,15 +5,15 @@ import {
     Switch,
     Redirect,
 } from "react-router-dom";
-import SignIn from "./components/SignIn";
-import SignUp from "./components/SignUp";
-import NotFound from "./components/NotFound";
-import Statistics from "./components/Statistics";
-import Header from "./components/Header";
-import Calories from "./components/Calories";
-import Forum from "./components/Forum";
+import SignIn from "./components/SignInPage/SignIn";
+import SignUp from "./components/SignUpPage/SignUp";
+import NotFound from "./components/NotFoundPage/NotFound";
+import Statistics from "./components/StatisticsPage/Statistics";
+import Header from "./components/CommonComponents/Header";
+import Calories from "./components/CaloriesPage/Calories";
+import Forum from "./components/ForumPage/Forum";
 import Post from "./components/Post";
-import User from "./components/User";
+import User from "./components/UserPage/User";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 const themeLight = createTheme({
