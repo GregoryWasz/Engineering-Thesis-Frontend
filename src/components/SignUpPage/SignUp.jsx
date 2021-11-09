@@ -12,6 +12,11 @@ import Container from "@mui/material/Container";
 import axios from "../../api/axios";
 import { useHistory } from "react-router";
 import ErrorAlert from "../CommonComponents/ErrorAlert";
+import {
+    signInPagePath,
+    createUserApiPath,
+    somethingWentWrong,
+} from "../Consts/paths";
 
 export default function SignUp() {
     const [username, setUsername] = useState("");
@@ -26,9 +31,9 @@ export default function SignUp() {
         setIsError(false);
 
         await axios
-            .post("/users", { username, email, password })
+            .post(createUserApiPath, { username, email, password })
             .then(() => {
-                history.push("/");
+                history.push(signInPagePath);
             })
             .catch((error) => {
                 setIsError(true);
@@ -36,7 +41,7 @@ export default function SignUp() {
                 try {
                     setErrorMessage(error.response.data.detail.Error);
                 } catch {
-                    setErrorMessage("Something went wrong");
+                    setErrorMessage(somethingWentWrong);
                 }
             });
     }
@@ -117,7 +122,7 @@ export default function SignUp() {
                         </Button>
                         <Grid container justifyContent="flex-end">
                             <Grid item>
-                                <Link href="/" variant="body2">
+                                <Link href={signInPagePath} variant="body2">
                                     Already have an account? Sign in
                                 </Link>
                             </Grid>

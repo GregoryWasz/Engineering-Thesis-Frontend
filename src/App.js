@@ -15,6 +15,16 @@ import Forum from "./components/ForumPage/Forum";
 import Post from "./components/Post";
 import User from "./components/UserPage/User";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+import {
+    signUpPagePath,
+    notFoundPagePath,
+    signInPagePath,
+    caloriesPagePath,
+    statisticsPagePath,
+    forumPagePath,
+    userPagePath,
+    forumPostPagePath,
+} from "./components/Consts/paths";
 
 const themeLight = createTheme({
     palette: {
@@ -28,39 +38,39 @@ function App() {
     return (
         <Router>
             <Switch>
-                <Route exact path="/">
+                <Route exact path={signInPagePath}>
                     <SignIn />
                 </Route>
-                <Route exact path="/sign-up">
+                <Route exact path={signUpPagePath}>
                     <SignUp />
                 </Route>
                 <ThemeProvider theme={themeLight}>
                     <Switch>
-                        <Route path="/calories">
+                        <Route path={caloriesPagePath}>
                             <Header />
                             <Calories />
                         </Route>
-                        <Route path="/statistics">
+                        <Route path={statisticsPagePath}>
                             <Header />
                             <Statistics />
                         </Route>
-                        <Route path="/forum">
+                        <Route path={forumPagePath}>
                             <Header />
                             <Forum />
                         </Route>
-                        <Route path="/forum/post/:id">
+                        <Route path={forumPostPagePath}>
                             <Header />
                             <Post />
                         </Route>
-                        <Route path="/user">
+                        <Route path={userPagePath}>
                             <Header />
                             <User />
                         </Route>
-                        <Route path="/not-found">
+                        <Route path={notFoundPagePath}>
                             <NotFound />
                         </Route>
                         <Route>
-                            <Redirect to="/not-found" />
+                            <Redirect to={notFoundPagePath} />
                         </Route>
                     </Switch>
                 </ThemeProvider>
