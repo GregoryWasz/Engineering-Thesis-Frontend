@@ -15,9 +15,11 @@ function createData(date, weight) {
 }
 
 const rows = [
-    createData("2005-01-02T03:01:45", 159),
-    createData("2005-01-02T03:01:45", 159),
-    createData("2005-01-02T03:01:45", 159),
+    createData("2005-01-02T03:01:45", 100),
+    createData("2005-01-03T03:01:45", 200),
+    createData("2005-01-04T03:01:45", 300),
+    createData("2005-01-05T03:01:45", 350),
+    createData("2005-01-06T03:01:45", 400),
 ];
 
 export default function StatisticsTable() {
@@ -48,7 +50,9 @@ export default function StatisticsTable() {
                                     {row.date}
                                 </TableCell>
 
-                                <TableCell align="right">{row.date}</TableCell>
+                                <TableCell align="right">
+                                    {row.weight}
+                                </TableCell>
                                 <TableCell align="right">
                                     <Button
                                         size="small"
