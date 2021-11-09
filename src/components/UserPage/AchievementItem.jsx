@@ -8,13 +8,14 @@ export default function AchievementItem(props) {
             <Paper
                 sx={{
                     p: 2,
-
                     display: "flex",
                     flexDirection: "column",
                 }}
             >
+                <Typography sx={{ color: "Gray", fontSize: 10 }}>
+                    {props.date.replace("T", " ").slice(0, -7)}
+                </Typography>
                 <Typography>{props.title}</Typography>
-                <Typography>{props.description}</Typography>
             </Paper>
         </Grid>
     );

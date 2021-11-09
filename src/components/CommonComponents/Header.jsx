@@ -8,11 +8,21 @@ import IconButton from "@mui/material/IconButton";
 import ForumOutlinedIcon from "@mui/icons-material/ForumOutlined";
 import QueryStatsOutlinedIcon from "@mui/icons-material/QueryStatsOutlined";
 import LocalFireDepartmentOutlinedIcon from "@mui/icons-material/LocalFireDepartmentOutlined";
-
+import jwt_decode from "jwt-decode";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
+import { signInPagePath } from "../Consts/paths";
+import { useHistory } from "react-router";
 
 export default function Header() {
+    const history = useHistory();
+
+    async function handleLogout(e) {
+        e.preventDefault();
+        localStorage.removeItem("bearer");
+        history.push(signInPagePath);
+    }
+
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">
@@ -92,10 +102,14 @@ export default function Header() {
                                 sx={{ ml: 1, textTransform: "capitalize" }}
                                 display={{ xs: "none", md: "block" }}
                             >
-                                {"{Username}"}
+                                {
+                                    jwt_decode(localStorage.getItem("bearer"))[
+                                        "sub"
+                                    ]
+                                }
                             </Typography>
                         </Button>
-                        <Button color="inherit" href="/">
+                        <Button color="inherit" onClick={handleLogout}>
                             <LogoutOutlinedIcon />
                             <Typography
                                 sx={{ ml: 1, textTransform: "capitalize" }}

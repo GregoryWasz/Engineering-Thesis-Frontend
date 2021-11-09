@@ -10,19 +10,7 @@ export const notFoundPagePath = "/not-found";
 
 // API paths
 export const createUserApiPath = "/users/";
+export const loginApiPath = "/auth/token";
 
 // Messages
 export const somethingWentWrong = "Something went wrong";
-
-// export default {
-//     signInPagePath,
-//     signUpPagePath,
-//     forumPagePath,
-//     caloriesPagePath,
-//     statisticsPagePath,
-//     statisticsPagePath,
-//     userPagePath,
-//     notFoundPagePath,
-//     createUserApiPath,
-//     somethingWentWrong,
-// };

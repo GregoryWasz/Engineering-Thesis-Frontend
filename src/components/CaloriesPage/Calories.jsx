@@ -7,10 +7,26 @@ import {
 } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import { Box } from "@mui/system";
-import React from "react";
+import React, { useEffect } from "react";
 import CaloriesTable from "./CaloriesTable";
+import axios from "../../api/axios";
+
+async function getProductsTable() {
+    await axios
+        .get("/products/")
+        .then((response) => {
+            console.log(response.data);
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+}
 
 export default function Forum() {
+    useEffect(() => {
+        getProductsTable();
+    }, []);
+
     return (
         <>
             <Box sx={{ display: "flex" }}>

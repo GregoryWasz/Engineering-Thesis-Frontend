@@ -1,7 +1,7 @@
 import { Paper, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid";
 
-export default function UserBasicInformations() {
+export default function UserBasicInformations(props) {
     return (
         <Grid item xs={12} md={8} lg={9}>
             <Paper
@@ -9,11 +9,11 @@ export default function UserBasicInformations() {
                     p: 2,
                     display: "flex",
                     flexDirection: "column",
-                    minHeight: 224,
+                    minHeight: 276,
                 }}
             >
-                <Typography variant="h2"> {"{Username}"}</Typography>
-                <Typography variant="h3"> {"{Email}"}</Typography>
+                <Typography variant="h3">Username: {props.username}</Typography>
+                <Typography variant="h4"> Email: {props.email}</Typography>
             </Paper>
         </Grid>
     );

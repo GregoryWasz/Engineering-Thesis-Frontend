@@ -66,7 +66,7 @@ export default function SignUp() {
                     </Typography>
                     <Box
                         component="form"
-                        // onSubmit={handleSubmit}
+                        onSubmit={handleSignUp}
                         sx={{ mt: 3 }}
                     >
                         {isError && <ErrorAlert message={errorMessage} />}
@@ -116,7 +116,6 @@ export default function SignUp() {
                             fullWidth
                             variant="contained"
                             sx={{ mt: 3, mb: 2 }}
-                            onClick={handleSignUp}
                         >
                             Sign Up
                         </Button>

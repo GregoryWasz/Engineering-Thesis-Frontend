@@ -1,4 +1,5 @@
 import {
+    Alert,
     Button,
     Container,
     CssBaseline,
@@ -7,19 +8,65 @@ import {
 } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import { Box } from "@mui/system";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import AchievementItem from "./AchievementItem";
 import UserBasicInformations from "./UserBasicInformations";
 import UserChangeButtons from "./UserChangeButtons";
+import axios from "../../api/axios";
 
 export default function User() {
+    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
+    const [achievements, setAchievements] = useState([]);
+    const [showAlert, setShowAlert] = useState(false);
+    const [alertText, setAlertText] = useState("");
+
+    async function handleCheckAchievements(e) {
+        e.preventDefault();
+        setShowAlert(false);
+        await axios
+            .get("/achievements/check")
+            .then((response) => {
+                console.log(response);
+                setAlertText(response.data.Message);
+                setShowAlert(true);
+                getAchievements();
+            })
+            .catch((error) => {});
+    }
+
+    async function getUser() {
+        await axios
+            .get("/auth/me")
+            .then((response) => {
+                setUsername(response.data.username);
+                setEmail(response.data.email);
+            })
+            .catch((error) => {});
+    }
+    async function getAchievements() {
+        await axios
+            .get("/achievements/")
+            .then((response) => {
+                setAchievements(response.data);
+            })
+            .catch((error) => {});
+    }
+
+    useEffect(() => {
+        getUser();
+        getAchievements();
+    }, []);
     return (
         <>
             <Box sx={{ display: "flex" }}>
                 <CssBaseline />
                 <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
                     <Grid container spacing={3}>
-                        <UserBasicInformations />
+                        <UserBasicInformations
+                            username={username}
+                            email={email}
+                        />
                         <UserChangeButtons />
 
                         <Grid item xs={12} md={12} lg={12}>
@@ -30,9 +77,17 @@ export default function User() {
                                     flexDirection: "column",
                                 }}
                             >
-                                <Button variant="contained">
+                                <Button
+                                    variant="contained"
+                                    onClick={handleCheckAchievements}
+                                >
                                     Check achievements!
                                 </Button>
+                                {showAlert && (
+                                    <Alert sx={{ mt: 1.5 }} severity="info">
+                                        {alertText}
+                                    </Alert>
+                                )}
                             </Paper>
                         </Grid>
                         <Grid item xs={12} md={12} lg={12}>
@@ -51,31 +106,20 @@ export default function User() {
                                 </Typography>
                             </Paper>
                         </Grid>
-
-                        <AchievementItem
-                            title="Poster!"
-                            description="You posted 25 times!"
-                        />
-                        <AchievementItem
-                            title="Measure Master!"
-                            description="You Measured yourself 25 times!"
-                        />
-                        <AchievementItem
-                            title="Comentator!"
-                            description="You Commented post 25 times!"
-                        />
-                        <AchievementItem
-                            title="Comentator!"
-                            description="You Commented post 5 times!"
-                        />
-                        <AchievementItem
-                            title="Comentator!"
-                            description="You Commented post 10 times!"
-                        />
-                        <AchievementItem
-                            title="Comentator!"
-                            description="You Commented post 15 times!"
-                        />
+                        {achievements.map((achievement) => {
+                            const {
+                                achievement_name,
+                                achievement_date,
+                                achievement_id,
+                            } = achievement;
+                            return (
+                                <AchievementItem
+                                    key={achievement_id}
+                                    title={achievement_name}
+                                    date={achievement_date}
+                                />
+                            );
+                        })}
                     </Grid>
                 </Container>
             </Box>
