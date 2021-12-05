@@ -1,4 +1,4 @@
-import { Button, Paper, TextField, Alert } from "@mui/material";
+import { Button, Paper, TextField, Alert, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
@@ -94,7 +94,13 @@ export default function UserChangeButtons() {
                     <Button
                         variant="outlined"
                         color="warning"
-                        onClick={(e) => setShowChangeUsername(true)}
+                        onClick={(e) => {
+                            setShowChangeUsername(true);
+                            setShowChangeEmail(false);
+                            setShowChangePassword(false);
+                            setShowChangeCalorieLimit(false);
+                            setShowDeleteAccount(false);
+                        }}
                     >
                         <EditOutlinedIcon /> Change Username
                     </Button>
@@ -102,7 +108,13 @@ export default function UserChangeButtons() {
                         sx={{ mt: 2 }}
                         variant="outlined"
                         color="warning"
-                        onClick={(e) => setShowChangePassword(true)}
+                        onClick={(e) => {
+                            setShowChangePassword(true);
+                            setShowChangeUsername(false);
+                            setShowChangeEmail(false);
+                            setShowChangeCalorieLimit(false);
+                            setShowDeleteAccount(false);
+                        }}
                     >
                         <EditOutlinedIcon />
                         Change Password
@@ -111,7 +123,13 @@ export default function UserChangeButtons() {
                         sx={{ mt: 2 }}
                         variant="outlined"
                         color="warning"
-                        onClick={(e) => setShowChangeEmail(true)}
+                        onClick={(e) => {
+                            setShowChangeEmail(true);
+                            setShowChangeUsername(false);
+                            setShowChangePassword(false);
+                            setShowChangeCalorieLimit(false);
+                            setShowDeleteAccount(false);
+                        }}
                     >
                         <EditOutlinedIcon />
                         Change Email
@@ -120,7 +138,13 @@ export default function UserChangeButtons() {
                         sx={{ mt: 2 }}
                         variant="outlined"
                         color="warning"
-                        onClick={(e) => setShowChangeCalorieLimit(true)}
+                        onClick={(e) => {
+                            setShowChangeCalorieLimit(true);
+                            setShowChangeUsername(false);
+                            setShowChangeEmail(false);
+                            setShowChangePassword(false);
+                            setShowDeleteAccount(false);
+                        }}
                     >
                         <EditOutlinedIcon />
                         Change Calorie Limit
@@ -129,7 +153,13 @@ export default function UserChangeButtons() {
                         sx={{ mt: 2 }}
                         variant="outlined"
                         color="error"
-                        onClick={(e) => setShowDeleteAccount(true)}
+                        onClick={(e) => {
+                            setShowDeleteAccount(true);
+                            setShowChangeUsername(false);
+                            setShowChangeEmail(false);
+                            setShowChangePassword(false);
+                            setShowChangeCalorieLimit(false);
+                        }}
                     >
                         <DeleteForeverOutlinedIcon />
                         Delete Account
@@ -143,7 +173,10 @@ export default function UserChangeButtons() {
                     </Alert>
                 )}
                 {showChangeUsername && (
-                    <>
+                    <Paper sx={{ p: 2 }}>
+                        <Typography variant="h5" sx={{ mb: 1 }}>
+                            Insert new username
+                        </Typography>
                         <TextField
                             margin="normal"
                             required
@@ -169,10 +202,13 @@ export default function UserChangeButtons() {
                         >
                             Cancel
                         </Button>
-                    </>
+                    </Paper>
                 )}
                 {showChangeEmail && (
-                    <>
+                    <Paper sx={{ p: 2 }}>
+                        <Typography variant="h5" sx={{ mb: 1 }}>
+                            Insert new email address
+                        </Typography>
                         <TextField
                             margin="normal"
                             required
@@ -198,10 +234,13 @@ export default function UserChangeButtons() {
                         >
                             Cancel
                         </Button>
-                    </>
+                    </Paper>
                 )}
                 {showChangePassword && (
-                    <>
+                    <Paper sx={{ p: 2 }}>
+                        <Typography variant="h5" sx={{ mb: 1 }}>
+                            Insert new password
+                        </Typography>
                         <TextField
                             margin="normal"
                             required
@@ -227,11 +266,14 @@ export default function UserChangeButtons() {
                         >
                             Cancel
                         </Button>
-                    </>
+                    </Paper>
                 )}
 
                 {showChangeCalorieLimit && (
-                    <>
+                    <Paper sx={{ p: 2 }}>
+                        <Typography variant="h5" sx={{ mb: 1 }}>
+                            Insert new calorie limit
+                        </Typography>
                         <TextField
                             margin="normal"
                             required
@@ -258,25 +300,28 @@ export default function UserChangeButtons() {
                         >
                             Cancel
                         </Button>
-                    </>
+                    </Paper>
                 )}
                 {showDeleteAccount && (
-                    <>
+                    <Paper sx={{ p: 2 }}>
+                        <Typography variant="h5" sx={{ mb: 1 }}>
+                            Are you sure?
+                        </Typography>
                         <Button
                             variant="contained"
                             color="error"
                             sx={{ mr: 1 }}
                             onClick={(e) => handleDeleteAccount()}
                         >
-                            Delete Account
+                            Yes
                         </Button>
                         <Button
                             variant="contained"
                             onClick={(e) => setShowDeleteAccount(false)}
                         >
-                            Cancel
+                            No
                         </Button>
-                    </>
+                    </Paper>
                 )}
             </Grid>
         </>

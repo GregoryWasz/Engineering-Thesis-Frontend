@@ -3,15 +3,56 @@ import {
     Container,
     CssBaseline,
     Paper,
-    Typography,
+    TextField,
 } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import { Box } from "@mui/system";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Chart from "./Chart";
 import StatisticsTable from "./StatisticsTable";
+import axios from "../../api/axios";
 
-export default function Forum() {
+export default function Statistics() {
+    const [bodyWeights, setBodyWeights] = useState([]);
+    const [showAddBodyWeightForm, setShowAddBodyWeightForm] = useState(false);
+    const [bodyWeight, setBodyWeight] = useState("");
+
+    function handleAddBodyWeightForm(e) {
+        e.preventDefault();
+        if (showAddBodyWeightForm === true) {
+            setShowAddBodyWeightForm(false);
+        } else {
+            setShowAddBodyWeightForm(true);
+        }
+    }
+
+    async function handleAddBodyWeight() {
+        var current_date = new Date().toISOString();
+        await axios
+            .post("/body_weights/", {
+                weight_amount: bodyWeight,
+                weighting_date: current_date,
+            })
+            .then((response) => {
+                getBodyWeights();
+                setBodyWeight("");
+                setShowAddBodyWeightForm(false);
+            })
+            .catch((error) => {});
+    }
+
+    async function getBodyWeights() {
+        await axios
+            .get("/body_weights/")
+            .then((response) => {
+                setBodyWeights(response.data);
+            })
+            .catch((error) => {});
+    }
+
+    useEffect(() => {
+        getBodyWeights();
+    }, []);
     return (
         <>
             <Box sx={{ display: "flex" }}>
@@ -26,18 +67,55 @@ export default function Forum() {
                                     flexDirection: "column",
                                 }}
                             >
-                                <Button variant="contained" sx={{ mb: 1 }}>
+                                <Button
+                                    variant="contained"
+                                    sx={{ mb: 1 }}
+                                    onClick={handleAddBodyWeightForm}
+                                >
                                     Insert new bodyweight record
                                 </Button>
-                                <Typography>
-                                    Displaying last: {22} Records
-                                </Typography>
+                                {showAddBodyWeightForm && (
+                                    <>
+                                        <TextField
+                                            margin="normal"
+                                            required
+                                            fullWidth
+                                            id="weight"
+                                            label="New weight measure"
+                                            name="weight"
+                                            autoComplete="weight"
+                                            autoFocus
+                                            onChange={(e) =>
+                                                setBodyWeight(e.target.value)
+                                            }
+                                        ></TextField>
+                                        <Button
+                                            variant="contained"
+                                            color="success"
+                                            sx={{ mb: 1 }}
+                                            onClick={(e) =>
+                                                handleAddBodyWeight()
+                                            }
+                                        >
+                                            Submit
+                                        </Button>
+                                        <Button
+                                            variant="contained"
+                                            onClick={(e) =>
+                                                setShowAddBodyWeightForm(false)
+                                            }
+                                        >
+                                            Cancel
+                                        </Button>
+                                    </>
+                                )}
                             </Paper>
                         </Grid>
-
-                        <Chart />
-
-                        <StatisticsTable />
+                        <Chart bodyWeights={bodyWeights} />
+                        <StatisticsTable
+                            bodyWeights={bodyWeights}
+                            getBodyWeights={getBodyWeights}
+                        />
                     </Grid>
                 </Container>
             </Box>

@@ -9,30 +9,26 @@ import {
     Tooltip,
 } from "recharts";
 
-const data = [
-    { date: "2005-01-02T03:01:45", weight: 100 },
-    { date: "2005-01-03T03:01:45", weight: 200 },
-    { date: "2005-01-04T03:01:45", weight: 300 },
-    { date: "2005-01-05T03:01:45", weight: 350 },
-    { date: "2005-01-06T03:01:45", weight: 400 },
-];
-
-export default function Chart() {
+export default function Chart(props) {
     return (
         <Grid item xs={12} md={12} lg={12}>
             <Paper
                 sx={{
                     p: 2,
                     display: "flex",
-                    flexDirection: "column",
+                    justifyContent: "center",
                 }}
             >
-                <LineChart width={500} height={300} data={data}>
-                    <Line type="monotone" dataKey="weight" stroke="#8884d8" />
+                <LineChart width={500} height={300} data={props.bodyWeights}>
+                    <XAxis dataKey="weighting_date" tick={false} />
+                    <YAxis dataKey="weight_amount" />
                     <CartesianGrid stroke="#ccc" />
-                    <XAxis dataKey="date" />
-                    <YAxis dataKey="weight" />
                     <Tooltip />
+                    <Line
+                        type="monotone"
+                        dataKey="weight_amount"
+                        stroke="#ccc"
+                    />
                 </LineChart>
             </Paper>
         </Grid>

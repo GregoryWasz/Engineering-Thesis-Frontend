@@ -7,24 +7,35 @@ import {
 } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import { Box } from "@mui/system";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import CaloriesTable from "./CaloriesTable";
 import axios from "../../api/axios";
 
-async function getProductsTable() {
-    await axios
-        .get("/products/")
-        .then((response) => {
-            console.log(response.data);
-        })
-        .catch((error) => {
-            console.log(error);
-        });
-}
+export default function Calories() {
+    const [calorieLimit, setCalorieLimit] = useState(2000);
+    const [products, setProducts] = useState([]);
 
-export default function Forum() {
+    async function getProductsTable() {
+        await axios
+            .get("/products/")
+            .then((response) => {
+                setProducts(response.data);
+            })
+            .catch((error) => {});
+    }
+
+    async function getUser() {
+        await axios
+            .get("/auth/me")
+            .then((response) => {
+                setCalorieLimit(response.data.calorie_limit);
+            })
+            .catch((error) => {});
+    }
+
     useEffect(() => {
         getProductsTable();
+        getUser();
     }, []);
 
     return (
@@ -56,7 +67,7 @@ export default function Forum() {
                             </Paper>
                         </Grid>
                         <Grid item xs={12} md={12} lg={12}>
-                            <CaloriesTable />
+                            <CaloriesTable products={products} />
                         </Grid>
                         <Grid item xs={12} md={12} lg={12}>
                             <Paper
@@ -68,7 +79,7 @@ export default function Forum() {
                             >
                                 <Typography variant="h5">Resume</Typography>
                                 <Typography>
-                                    You eaten {600} of {1500} your daily
+                                    You eaten {600} of {calorieLimit} your daily
                                     Calories
                                 </Typography>
                                 <Typography>Good Luck!</Typography>

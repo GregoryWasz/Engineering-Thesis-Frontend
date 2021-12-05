@@ -28,7 +28,6 @@ export default function User() {
         await axios
             .get("/achievements/check")
             .then((response) => {
-                console.log(response);
                 setAlertText(response.data.Message);
                 setShowAlert(true);
                 getAchievements();

@@ -10,17 +10,7 @@ import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
 import { Button } from "@mui/material";
 
-function createData(name, caloriesIn100, calories, date) {
-    return { name, caloriesIn100, calories, date };
-}
-
-const rows = [
-    createData("Frozen yoghurt", 159, 200, "2005-01-02T03:01:45"),
-    createData("Chicken", 159, 200, "2005-01-02T03:01:45"),
-    createData("Pizza", 159, 200, "2005-01-02T03:01:45"),
-];
-
-export default function CaloriesTable() {
+export default function CaloriesTable(props) {
     return (
         <TableContainer component={Paper}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -38,9 +28,9 @@ export default function CaloriesTable() {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {rows.map((row) => (
+                    {props.products.map((row) => (
                         <TableRow
-                            key={row.name}
+                            key={row.product_name}
                             sx={{
                                 "&:last-child td, &:last-child th": {
                                     border: 0,
@@ -48,13 +38,17 @@ export default function CaloriesTable() {
                             }}
                         >
                             <TableCell component="th" scope="row">
-                                {row.name}
+                                {row.product_name}
                             </TableCell>
                             <TableCell align="right">
-                                {row.caloriesIn100}
+                                {row.product_calorific_value}
                             </TableCell>
-                            <TableCell align="right">{row.calories}</TableCell>
-                            <TableCell align="right">{row.date}</TableCell>
+                            <TableCell align="right">
+                                {row.product_calorific_value}
+                            </TableCell>
+                            <TableCell align="right">
+                                {row.product_date}
+                            </TableCell>
                             <TableCell align="right">
                                 <Button
                                     size="small"
