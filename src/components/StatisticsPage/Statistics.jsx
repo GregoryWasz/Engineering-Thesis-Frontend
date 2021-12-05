@@ -1,4 +1,5 @@
 import {
+    Alert,
     Button,
     Container,
     CssBaseline,
@@ -16,6 +17,7 @@ export default function Statistics() {
     const [bodyWeights, setBodyWeights] = useState([]);
     const [showAddBodyWeightForm, setShowAddBodyWeightForm] = useState(false);
     const [bodyWeight, setBodyWeight] = useState("");
+    const [showAlert, setShowAlert] = useState();
 
     function handleAddBodyWeightForm(e) {
         e.preventDefault();
@@ -34,20 +36,26 @@ export default function Statistics() {
                 weighting_date: current_date,
             })
             .then((response) => {
+                setShowAlert(false);
                 getBodyWeights();
                 setBodyWeight("");
                 setShowAddBodyWeightForm(false);
             })
-            .catch((error) => {});
+            .catch((error) => {
+                setShowAlert(true);
+            });
     }
 
     async function getBodyWeights() {
         await axios
             .get("/body_weights/")
             .then((response) => {
+                setShowAlert(false);
                 setBodyWeights(response.data);
             })
-            .catch((error) => {});
+            .catch((error) => {
+                setShowAlert(true);
+            });
     }
 
     useEffect(() => {
@@ -58,6 +66,11 @@ export default function Statistics() {
             <Box sx={{ display: "flex" }}>
                 <CssBaseline />
                 <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+                    {showAlert && (
+                        <Alert sx={{ mb: 1 }} severity="error">
+                            Error occured
+                        </Alert>
+                    )}
                     <Grid container spacing={3}>
                         <Grid item xs={12} md={12} lg={12}>
                             <Paper
@@ -85,6 +98,7 @@ export default function Statistics() {
                                             name="weight"
                                             autoComplete="weight"
                                             autoFocus
+                                            type="number"
                                             onChange={(e) =>
                                                 setBodyWeight(e.target.value)
                                             }

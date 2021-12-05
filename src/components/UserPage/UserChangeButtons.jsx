@@ -168,7 +168,7 @@ export default function UserChangeButtons() {
             </Grid>
             <Grid item xs={12} md={12} lg={12}>
                 {showAlert && (
-                    <Alert sx={{ mt: 1.5 }} severity="warning">
+                    <Alert sx={{ mt: 1.5, mb: 1 }} severity="error">
                         Error occured
                     </Alert>
                 )}

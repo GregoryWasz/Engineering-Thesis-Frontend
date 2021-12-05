@@ -13,7 +13,7 @@ export default function UserBasicInformations(props) {
                 }}
             >
                 <Typography variant="h3">Username: {props.username}</Typography>
-                <Typography variant="h4"> Email: {props.email}</Typography>
+                <Typography variant="h4">Email: {props.email}</Typography>
                 <Typography variant="h5">
                     Calorie limit: {props.calorieLimit}
                 </Typography>
