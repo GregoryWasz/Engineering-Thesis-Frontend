@@ -17,6 +17,7 @@ import axios from "../../api/axios";
 export default function User() {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
+    const [calorieLimit, setCalorieLimit] = useState("");
     const [achievements, setAchievements] = useState([]);
     const [showAlert, setShowAlert] = useState(false);
     const [alertText, setAlertText] = useState("");
@@ -41,6 +42,7 @@ export default function User() {
             .then((response) => {
                 setUsername(response.data.username);
                 setEmail(response.data.email);
+                setCalorieLimit(response.data.calorie_limit);
             })
             .catch((error) => {});
     }
@@ -66,6 +68,7 @@ export default function User() {
                         <UserBasicInformations
                             username={username}
                             email={email}
+                            calorieLimit={calorieLimit}
                         />
                         <UserChangeButtons />
 

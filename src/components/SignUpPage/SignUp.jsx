@@ -30,8 +30,15 @@ export default function SignUp() {
         e.preventDefault();
         setIsError(false);
 
+        const calorie_limit = 2000;
+
         await axios
-            .post(createUserApiPath, { username, email, password })
+            .post(createUserApiPath, {
+                username,
+                email,
+                password,
+                calorie_limit,
+            })
             .then(() => {
                 history.push(signInPagePath);
             })
