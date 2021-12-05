@@ -6,7 +6,7 @@ import { useState } from "react";
 import axios from "../../api/axios";
 import { useHistory } from "react-router";
 
-export default function UserChangeButtons() {
+export default function UserChangeButtons(props) {
     const [showChangeUsername, setShowChangeUsername] = useState(false);
     const [showChangeEmail, setShowChangeEmail] = useState(false);
     const [showChangePassword, setShowChangePassword] = useState(false);
@@ -61,8 +61,9 @@ export default function UserChangeButtons() {
         await axios
             .put("/users/calorie", { calorie_limit: newCalorieLimit })
             .then((response) => {
-                localStorage.removeItem("bearer");
-                history.push("/");
+                props.getUser();
+                setNewCalorieLimit();
+                setShowChangeCalorieLimit(false);
             })
             .catch((error) => {
                 setShowAlert(true);

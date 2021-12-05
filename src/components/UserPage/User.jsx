@@ -69,7 +69,7 @@ export default function User() {
                             email={email}
                             calorieLimit={calorieLimit}
                         />
-                        <UserChangeButtons />
+                        <UserChangeButtons getUser={getUser} />
 
                         <Grid item xs={12} md={12} lg={12}>
                             <Paper
