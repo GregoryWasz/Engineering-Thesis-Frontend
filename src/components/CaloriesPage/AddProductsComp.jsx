@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Paper, TextField, Typography } from "@mui/material";
+import { Alert, Button, Paper, TextField, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import axios from "../../api/axios";
 
@@ -9,10 +9,12 @@ function AddProductsComp(props) {
     const [showQuickAddProductForm, setShowQuickAddProductForm] =
         useState(false);
     const [showAddProductForm, setShowAddProductForm] = useState(false);
-    const [CalorieIn100, setCalorieIn100] = useState(false);
-    const [MealWeight, setMealWeight] = useState(false);
+    const [showErrorAlert, setShowErrorAlert] = useState(false);
+    const [CalorieIn100, setCalorieIn100] = useState(0);
+    const [MealWeight, setMealWeight] = useState(0);
 
     async function handleAddProduct(calory) {
+        setShowErrorAlert(false);
         await axios
             .post("/products/", {
                 product_name: productName,
@@ -23,8 +25,15 @@ function AddProductsComp(props) {
                 props.getProductsTable();
                 setShowQuickAddProductForm(false);
                 setShowAddProductForm(false);
+                setProductName("");
+                setProductCalorificValue(0);
+                setCalorieIn100(0);
+                setMealWeight(0);
+                setShowErrorAlert(false);
             })
-            .catch((error) => {});
+            .catch((error) => {
+                setShowErrorAlert(true);
+            });
     }
 
     return (
@@ -38,6 +47,7 @@ function AddProductsComp(props) {
                 }}
             >
                 <Button
+                    sx={{ mr: 0.5 }}
                     variant="contained"
                     onClick={() => {
                         setShowQuickAddProductForm(true);
@@ -50,6 +60,7 @@ function AddProductsComp(props) {
                     Quick add new product
                 </Button>
                 <Button
+                    sx={{ ml: 0.5 }}
                     variant="contained"
                     onClick={() => {
                         setShowQuickAddProductForm(false);
@@ -62,6 +73,11 @@ function AddProductsComp(props) {
                     Calculate and add new product
                 </Button>
             </Paper>
+            {showErrorAlert && (
+                <Alert sx={{ mt: 2 }} severity="error">
+                    Error occured
+                </Alert>
+            )}
             {showQuickAddProductForm && (
                 <Paper
                     sx={{
