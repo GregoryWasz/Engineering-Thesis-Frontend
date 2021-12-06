@@ -10,9 +10,9 @@ function CreatePostForm(props) {
     const [postText, setPostText] = useState("");
 
     async function handleAddPost() {
-        setShowCreatePostForm(false);
+        setShowErrorAlert(false);
         await axios
-            .post("/posts/", {
+            .post("/posts", {
                 post_title: postTitle,
                 post_text: postText,
                 post_date: new Date(),
@@ -22,9 +22,10 @@ function CreatePostForm(props) {
                 setShowCreatePostForm(false);
                 setPostTitle("");
                 postText("");
+                setShowErrorAlert(false);
             })
             .catch((error) => {
-                setShowErrorAlert(true);
+                // setShowErrorAlert(true);
             });
     }
 

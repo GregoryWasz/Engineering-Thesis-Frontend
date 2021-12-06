@@ -47,7 +47,7 @@ export default function User() {
     }
     async function getAchievements() {
         await axios
-            .get("/achievements/")
+            .get("/achievements")
             .then((response) => {
                 setAchievements(response.data);
             })

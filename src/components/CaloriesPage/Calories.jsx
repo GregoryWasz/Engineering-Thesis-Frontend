@@ -25,7 +25,7 @@ export default function Calories() {
 
     async function getProductsTable() {
         await axios
-            .get("/products/")
+            .get("/products")
             .then((response) => {
                 setProducts(response.data);
             })

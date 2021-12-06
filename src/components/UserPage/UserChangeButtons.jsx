@@ -72,7 +72,7 @@ export default function UserChangeButtons(props) {
     async function handleDeleteAccount() {
         setShowAlert(false);
         await axios
-            .delete("/users/")
+            .delete("/users")
             .then((response) => {
                 localStorage.removeItem("bearer");
                 history.push("/");

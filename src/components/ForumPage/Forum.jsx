@@ -20,7 +20,7 @@ export default function Forum() {
     }
     async function getPosts() {
         await axios
-            .get("/posts/")
+            .get("/posts")
             .then((response) => {
                 setPosts(response.data);
             })

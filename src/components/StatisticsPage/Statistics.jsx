@@ -31,7 +31,7 @@ export default function Statistics() {
     async function handleAddBodyWeight() {
         var current_date = new Date().toISOString();
         await axios
-            .post("/body_weights/", {
+            .post("/body_weights", {
                 weight_amount: bodyWeight,
                 weighting_date: current_date,
             })
@@ -48,7 +48,7 @@ export default function Statistics() {
 
     async function getBodyWeights() {
         await axios
-            .get("/body_weights/")
+            .get("/body_weights")
             .then((response) => {
                 setShowAlert(false);
                 setBodyWeights(response.data);

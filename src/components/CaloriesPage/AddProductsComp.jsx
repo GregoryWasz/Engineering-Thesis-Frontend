@@ -16,7 +16,7 @@ function AddProductsComp(props) {
     async function handleAddProduct(calory) {
         setShowErrorAlert(false);
         await axios
-            .post("/products/", {
+            .post("/products", {
                 product_name: productName,
                 product_date: props.currentDate,
                 product_calorific_value: calory,
