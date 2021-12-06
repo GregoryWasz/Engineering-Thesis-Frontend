@@ -1,13 +1,32 @@
-import { Avatar, Button, Paper, Typography } from "@mui/material";
+import {
+    Avatar,
+    Button,
+    Paper,
+    Snackbar,
+    Typography,
+    Alert,
+} from "@mui/material";
 import Grid from "@mui/material/Grid";
 import { Box } from "@mui/system";
-import React from "react";
+import React, { useState } from "react";
 import CommentOutlinedIcon from "@mui/icons-material/CommentOutlined";
 import ShareOutlinedIcon from "@mui/icons-material/ShareOutlined";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
+import axios from "../../api/axios";
 
-export default function PostItem() {
+export default function PostItem(props) {
+    const [open, setOpen] = useState(false);
+
+    async function handleDeletePost() {
+        await axios
+            .delete("/posts/" + props.post.post_id)
+            .then((response) => {
+                props.getPosts();
+            })
+            .catch((error) => {});
+    }
+
     return (
         <Grid item xs={12} md={12} lg={12}>
             <Paper
@@ -37,20 +56,14 @@ export default function PostItem() {
                             fontSize: 10,
                         }}
                     >
-                        {"Posted by: {Author}"}
+                        {props.post.post_creator.username}
                     </Typography>
-                    <Typography sx={{ fontSize: 10 }}>{"{Date}"}</Typography>
+                    <Typography sx={{ fontSize: 10 }}>
+                        {props.post.post_date.replace("T", " ").slice(0, -10)}
+                    </Typography>
                 </Box>
-                <Typography variant="h4">
-                    {
-                        "{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sapien.}"
-                    }
-                </Typography>
-                <Typography>
-                    {
-                        "{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam eros ex, pharetra laoreet dignissim eu, dictum at elit. Vestibulum elementum tortor vitae augue tristique, elementum venenatis felis blandit. Fusce gravida, nunc in fermentum mattis, lectus dolor ultricies quam, quis facilisis tellus turpis non turpis. Proin laoreet tellus ut ante pulvinar placerat. Vivamus laoreet, ipsum dapibus sollicitudin sodales, enim libero pellentesque turpis, ut euismod eros libero ut mauris. Nulla condimentum facilisis libero, in mollis mauris auctor non. Etiam ut nisi leo. Mauris lectus ipsum, eleifend eget molestie convallis, pretium non purus. Nam eget congue magna. Integer vehicula accumsan rutrum. Cras hendrerit.}"
-                    }
-                </Typography>
+                <Typography variant="h4">{props.post.post_title}</Typography>
+                <Typography>{props.post.post_text}</Typography>
                 <Box
                     sx={{
                         mt: 2,
@@ -59,20 +72,65 @@ export default function PostItem() {
                         justifyContent: "flex-end",
                     }}
                 >
-                    <Button variant="outlined" color="warning" sx={{ mr: 1 }}>
-                        <EditOutlinedIcon />
-                        <Typography sx={{ ml: 1 }}>EDIT</Typography>
-                    </Button>
-                    <Button variant="outlined" color="error" sx={{ mr: 1 }}>
-                        <DeleteForeverOutlinedIcon />
-                        <Typography sx={{ ml: 1 }}>DELETE</Typography>
-                    </Button>
+                    {" "}
+                    {props.currentUserID === props.post.user_id ? (
+                        <>
+                            <Button
+                                variant="outlined"
+                                color="warning"
+                                sx={{ mr: 1 }}
+                            >
+                                <EditOutlinedIcon />
+                                <Typography
+                                    sx={{ ml: 1 }}
+                                    onClick={() =>
+                                        console.log(
+                                            "TODO HREF TO POST EDIT IN COMMENTS",
+                                        )
+                                    }
+                                >
+                                    EDIT
+                                </Typography>
+                            </Button>
+                            <Button
+                                variant="outlined"
+                                color="error"
+                                sx={{ mr: 1 }}
+                            >
+                                <DeleteForeverOutlinedIcon />
+                                <Typography
+                                    sx={{ ml: 1 }}
+                                    onClick={(e) => handleDeletePost()}
+                                >
+                                    DELETE
+                                </Typography>
+                            </Button>
+                        </>
+                    ) : (
+                        <></>
+                    )}
                     <Button variant="outlined" sx={{ mr: 1 }}>
-                        <ShareOutlinedIcon />
+                        <ShareOutlinedIcon
+                            onClick={() => {
+                                navigator.clipboard.writeText("123");
+                                setOpen(true);
+                            }}
+                        />
+                        <Snackbar
+                            open={open}
+                            autoHideDuration={3000}
+                            onClick={() => setOpen(false)}
+                        >
+                            <Alert severity="info">
+                                Link copied to clipboard
+                            </Alert>
+                        </Snackbar>
                     </Button>
-                    <Button variant="outlined">
+                    <Button
+                        variant="outlined"
+                        onClick={() => console.log("TODO HREF TO COMMENTS")}
+                    >
                         <CommentOutlinedIcon />
-                        <Typography sx={{ ml: 1 }}>{"{0}"}</Typography>
                     </Button>
                 </Box>
             </Paper>

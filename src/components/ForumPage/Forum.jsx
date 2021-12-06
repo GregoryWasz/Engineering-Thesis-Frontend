@@ -1,30 +1,51 @@
-import { Button, Container, CssBaseline, Paper } from "@mui/material";
+import { Container, CssBaseline } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import { Box } from "@mui/system";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import PostItem from "./PostItem";
+import CreatePostForm from "./CreatePostForm";
+import axios from "../../api/axios";
 
 export default function Forum() {
+    const [currentUserID, setCurrentUserID] = useState("");
+    const [posts, setPosts] = useState([]);
+
+    async function getUser() {
+        await axios
+            .get("/auth/me")
+            .then((response) => {
+                setCurrentUserID(response.data.user_id);
+            })
+            .catch((error) => {});
+    }
+    async function getPosts() {
+        await axios
+            .get("/posts/")
+            .then((response) => {
+                setPosts(response.data);
+            })
+            .catch((error) => {});
+    }
+
+    useEffect(() => {
+        getUser();
+        getPosts();
+    }, []);
     return (
         <>
             <Box sx={{ display: "flex" }}>
                 <CssBaseline />
                 <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
                     <Grid container spacing={3}>
-                        <Grid item xs={12} md={12} lg={12}>
-                            <Paper
-                                sx={{
-                                    p: 2,
-                                    display: "flex",
-                                    flexDirection: "column",
-                                }}
-                            >
-                                <Button variant="contained">
-                                    Create new Post
-                                </Button>
-                            </Paper>
-                        </Grid>
-                        <PostItem />
+                        <CreatePostForm getPosts={getPosts} />
+                        {posts.map((post) => (
+                            <PostItem
+                                key={post.post_id}
+                                post={post}
+                                currentUserID={currentUserID}
+                                getPosts={getPosts}
+                            />
+                        ))}
                     </Grid>
                 </Container>
             </Box>
