@@ -4,7 +4,7 @@ import Grid from "@mui/material/Grid";
 
 export default function Resume(props) {
     return (
-        <Grid item xs={12} md={12} lg={12}>
+        <Grid item xs={12} md={9} lg={9}>
             <Paper
                 sx={{
                     p: 2,

@@ -5,12 +5,13 @@ import React, { useEffect, useState } from "react";
 import CaloriesTable from "./CaloriesTable";
 import axios from "../../api/axios";
 import Resume from "./Resume";
-import DatePicker from "./DatePicker";
+import DatePickerComp from "./DatePickerComp";
 import AddProductsComp from "./AddProductsComp";
 
 export default function Calories() {
-    const [calorieLimit, setCalorieLimit] = useState(2000);
+    const [calorieLimit, setCalorieLimit] = useState();
     const [products, setProducts] = useState([]);
+    const [currentDate, setDate] = useState(new Date());
 
     function calculateCaloriesEaten() {
         var calorieCount = 0;
@@ -51,12 +52,18 @@ export default function Calories() {
                 <CssBaseline />
                 <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
                     <Grid container spacing={3}>
-                        <AddProductsComp />
-                        <DatePicker />
-                        <CaloriesTable products={products} />
+                        <AddProductsComp
+                            currentDate={currentDate}
+                            getProductsTable={getProductsTable}
+                        />
                         <Resume
                             calculateCaloriesEaten={calculateCaloriesEaten}
                             calorieLimit={calorieLimit}
+                        />
+                        <DatePickerComp setDate={setDate} />
+                        <CaloriesTable
+                            products={products}
+                            getProductsTable={getProductsTable}
                         />
                     </Grid>
                 </Container>
