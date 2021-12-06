@@ -1,19 +1,26 @@
-import {
-    Button,
-    Container,
-    CssBaseline,
-    Paper,
-    Typography,
-} from "@mui/material";
+import { Container, CssBaseline } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import CaloriesTable from "./CaloriesTable";
 import axios from "../../api/axios";
+import Resume from "./Resume";
+import DatePicker from "./DatePicker";
+import AddProductsComp from "./AddProductsComp";
 
 export default function Calories() {
     const [calorieLimit, setCalorieLimit] = useState(2000);
     const [products, setProducts] = useState([]);
+
+    function calculateCaloriesEaten() {
+        var calorieCount = 0;
+
+        for (const product of products) {
+            calorieCount += product.product_calorific_value;
+        }
+
+        return calorieCount;
+    }
 
     async function getProductsTable() {
         await axios
@@ -44,47 +51,13 @@ export default function Calories() {
                 <CssBaseline />
                 <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
                     <Grid container spacing={3}>
-                        <Grid item xs={12} md={12} lg={12}>
-                            <Paper
-                                sx={{
-                                    p: 2,
-                                    display: "flex",
-                                    flexDirection: "column",
-                                }}
-                            >
-                                <Typography
-                                    variant="h5"
-                                    sx={{ textAlign: "center" }}
-                                >
-                                    Select date: TODO Datepicker
-                                </Typography>
-                                <Button
-                                    sx={{ p: 1, mt: 1 }}
-                                    variant="contained"
-                                >
-                                    Add new product
-                                </Button>
-                            </Paper>
-                        </Grid>
-                        <Grid item xs={12} md={12} lg={12}>
-                            <CaloriesTable products={products} />
-                        </Grid>
-                        <Grid item xs={12} md={12} lg={12}>
-                            <Paper
-                                sx={{
-                                    p: 2,
-                                    display: "flex",
-                                    flexDirection: "column",
-                                }}
-                            >
-                                <Typography variant="h5">Resume</Typography>
-                                <Typography>
-                                    You eaten {600} of {calorieLimit} your daily
-                                    Calories
-                                </Typography>
-                                <Typography>Good Luck!</Typography>
-                            </Paper>
-                        </Grid>
+                        <AddProductsComp />
+                        <DatePicker />
+                        <CaloriesTable products={products} />
+                        <Resume
+                            calculateCaloriesEaten={calculateCaloriesEaten}
+                            calorieLimit={calorieLimit}
+                        />
                     </Grid>
                 </Container>
             </Box>
