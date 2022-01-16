@@ -25,7 +25,11 @@ export default function Calories() {
 
     async function getProductsTable() {
         await axios
-            .get("/products")
+            .get("/products/daily", {
+                params: {
+                    current_date: currentDate.toISOString().split("T")[0],
+                },
+            })
             .then((response) => {
                 setProducts(response.data);
             })
@@ -44,7 +48,7 @@ export default function Calories() {
     useEffect(() => {
         getProductsTable();
         getUser();
-    }, []);
+    }, [currentDate]);
 
     return (
         <>
