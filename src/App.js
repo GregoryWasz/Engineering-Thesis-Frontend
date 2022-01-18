@@ -12,7 +12,7 @@ import Statistics from "./components/StatisticsPage/Statistics";
 import Header from "./components/CommonComponents/Header";
 import Calories from "./components/CaloriesPage/Calories";
 import Forum from "./components/ForumPage/Forum";
-import Post from "./components/Post";
+import SinglePostPage from "./components/PostPage/SinglePostPage";
 import User from "./components/UserPage/User";
 
 import { ThemeProvider, createTheme } from "@mui/material/styles";
@@ -55,13 +55,13 @@ function App() {
                             <Header />
                             <Statistics />
                         </Route>
-                        <Route path={forumPagePath}>
+                        <Route exact path={forumPagePath}>
                             <Header />
                             <Forum />
                         </Route>
-                        <Route path={forumPostPagePath}>
+                        <Route exact path={forumPostPagePath}>
                             <Header />
-                            <Post />
+                            <SinglePostPage />
                         </Route>
                         <Route path={userPagePath}>
                             <Header />

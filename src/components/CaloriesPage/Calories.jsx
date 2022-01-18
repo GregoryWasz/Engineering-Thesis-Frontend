@@ -48,6 +48,7 @@ export default function Calories() {
     useEffect(() => {
         getProductsTable();
         getUser();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currentDate]);
 
     return (

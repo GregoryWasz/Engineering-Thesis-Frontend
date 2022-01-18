@@ -11,21 +11,11 @@ import { Box } from "@mui/system";
 import React, { useState } from "react";
 import CommentOutlinedIcon from "@mui/icons-material/CommentOutlined";
 import ShareOutlinedIcon from "@mui/icons-material/ShareOutlined";
-import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
-import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
-import axios from "../../api/axios";
+import { Link } from "react-router-dom";
+import StarPurple500OutlinedIcon from "@mui/icons-material/StarPurple500Outlined";
 
 export default function PostItem(props) {
     const [open, setOpen] = useState(false);
-
-    async function handleDeletePost() {
-        await axios
-            .delete("/posts/" + props.post.post_id)
-            .then((response) => {
-                props.getPosts();
-            })
-            .catch((error) => {});
-    }
 
     return (
         <Grid item xs={12} md={12} lg={12}>
@@ -75,36 +65,15 @@ export default function PostItem(props) {
                     {" "}
                     {props.currentUserID === props.post.user_id ? (
                         <>
-                            <Button
-                                variant="outlined"
-                                color="warning"
-                                sx={{ mr: 1 }}
-                            >
-                                <EditOutlinedIcon />
-                                <Typography
-                                    sx={{ ml: 1 }}
-                                    onClick={() =>
-                                        console.log(
-                                            "TODO HREF TO POST EDIT IN COMMENTS",
-                                        )
-                                    }
+                            <Link to={"/forum/post/" + props.post.post_id}>
+                                <Button
+                                    variant="outlined"
+                                    color="warning"
+                                    sx={{ mr: 1 }}
                                 >
-                                    EDIT
-                                </Typography>
-                            </Button>
-                            <Button
-                                variant="outlined"
-                                color="error"
-                                sx={{ mr: 1 }}
-                            >
-                                <DeleteForeverOutlinedIcon />
-                                <Typography
-                                    sx={{ ml: 1 }}
-                                    onClick={(e) => handleDeletePost()}
-                                >
-                                    DELETE
-                                </Typography>
-                            </Button>
+                                    <StarPurple500OutlinedIcon />
+                                </Button>
+                            </Link>
                         </>
                     ) : (
                         <></>
@@ -112,7 +81,11 @@ export default function PostItem(props) {
                     <Button variant="outlined" sx={{ mr: 1 }}>
                         <ShareOutlinedIcon
                             onClick={() => {
-                                navigator.clipboard.writeText("123");
+                                navigator.clipboard.writeText(
+                                    document.URL +
+                                        "/post/" +
+                                        props.post.post_id,
+                                );
                                 setOpen(true);
                             }}
                         />
@@ -126,12 +99,11 @@ export default function PostItem(props) {
                             </Alert>
                         </Snackbar>
                     </Button>
-                    <Button
-                        variant="outlined"
-                        onClick={() => console.log("TODO HREF TO COMMENTS")}
-                    >
-                        <CommentOutlinedIcon />
-                    </Button>
+                    <Link to={"/forum/post/" + props.post.post_id}>
+                        <Button variant="outlined">
+                            <CommentOutlinedIcon />
+                        </Button>
+                    </Link>
                 </Box>
             </Paper>
         </Grid>
