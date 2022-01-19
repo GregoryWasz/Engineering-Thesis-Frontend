@@ -74,14 +74,14 @@ function AddProductsComp(props) {
                 </Button>
             </Paper>
             {showErrorAlert && (
-                <Alert sx={{ mt: 2 }} severity="error">
+                <Alert sx={{ mt: 3 }} severity="error">
                     Error occured
                 </Alert>
             )}
             {showQuickAddProductForm && (
                 <Paper
                     sx={{
-                        mt: 2,
+                        mt: 3,
                         p: 2,
                         display: "flex",
                         flexDirection: "column",
@@ -91,7 +91,7 @@ function AddProductsComp(props) {
                         Add new product
                     </Typography>
                     <TextField
-                        margin="normal"
+                        sx={{ mt: 1, mb: 1 }}
                         id="productName"
                         label="Product name"
                         name="productName"
@@ -99,7 +99,6 @@ function AddProductsComp(props) {
                     />
                     <TextField
                         sx={{ mb: 1 }}
-                        margin="normal"
                         id="calorificValue"
                         label="Calorie in product"
                         name="calorificValue"
@@ -128,7 +127,7 @@ function AddProductsComp(props) {
             {showAddProductForm && (
                 <Paper
                     sx={{
-                        mt: 2,
+                        mt: 3,
                         p: 2,
                         display: "flex",
                         flexDirection: "column",
@@ -138,14 +137,14 @@ function AddProductsComp(props) {
                         Add new product
                     </Typography>
                     <TextField
-                        margin="normal"
+                        sx={{ mt: 1, mb: 1 }}
                         id="productName"
                         label="Product name"
                         name="productName"
                         onChange={(e) => setProductName(e.target.value)}
                     />
                     <TextField
-                        margin="normal"
+                        sx={{ mb: 1 }}
                         id="calorieIn100"
                         label="Calorie in 100g"
                         name="calorieIn100"
@@ -153,7 +152,7 @@ function AddProductsComp(props) {
                         onChange={(e) => setCalorieIn100(e.target.value)}
                     />
                     <TextField
-                        margin="normal"
+                        sx={{ mb: 1 }}
                         id="mealWeight"
                         label="Meal Weight"
                         name="mealWeight"

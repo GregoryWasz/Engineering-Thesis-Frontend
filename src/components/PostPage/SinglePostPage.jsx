@@ -44,45 +44,43 @@ export default function SinglePostPage() {
     }, []);
 
     return (
-        <>
-            <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-                {notFoundError && (
-                    <>
-                        <Paper sx={{ p: 1 }}>
-                            <Alert severity="error" sx={{ mb: 1 }}>
-                                Post not found
-                            </Alert>
-                            <Button fullWidth href="/forum" variant="contained">
-                                {" "}
-                                Go Back
-                            </Button>
-                        </Paper>
-                    </>
-                )}
-                {notFoundError || (
-                    <SinglePostItem
-                        currentUserID={currentUserID}
-                        setNotFoundError={setNotFoundError}
-                    />
-                )}
-
-                {notFoundError || (
-                    <Paper sx={{ p: 2 }}>
-                        <Typography variant="h5"> Comments:</Typography>
-                        {comments.map((comment) => (
-                            <SingleCommentItem
-                                key={comment.comment_id}
-                                comment={comment}
-                                getComments={getComments}
-                                currentUserID={currentUserID}
-                            />
-                        ))}
-                        <Box sx={{ p: 1 }}>
-                            <AddCommentForm getComments={getComments} />
-                        </Box>
+        <Container maxWidth="lg" sx={{ mt: 4, mb: 4, bgcolor: "#f5f5f5" }}>
+            {notFoundError && (
+                <>
+                    <Paper sx={{ p: 1 }}>
+                        <Alert severity="error" sx={{ mb: 1 }}>
+                            Post not found
+                        </Alert>
+                        <Button fullWidth href="/forum" variant="contained">
+                            {" "}
+                            Go Back
+                        </Button>
                     </Paper>
-                )}
-            </Container>
-        </>
+                </>
+            )}
+            {notFoundError || (
+                <SinglePostItem
+                    currentUserID={currentUserID}
+                    setNotFoundError={setNotFoundError}
+                />
+            )}
+
+            {notFoundError || (
+                <Paper sx={{ p: 2 }}>
+                    <Typography variant="h5"> Comments:</Typography>
+                    {comments.map((comment) => (
+                        <SingleCommentItem
+                            key={comment.comment_id}
+                            comment={comment}
+                            getComments={getComments}
+                            currentUserID={currentUserID}
+                        />
+                    ))}
+                    <Box sx={{ p: 1 }}>
+                        <AddCommentForm getComments={getComments} />
+                    </Box>
+                </Paper>
+            )}
+        </Container>
     );
 }

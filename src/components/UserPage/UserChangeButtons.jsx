@@ -17,7 +17,7 @@ export default function UserChangeButtons(props) {
     const [newUsername, setNewUsername] = useState("");
     const [newEmail, setNewEmail] = useState("");
     const [newPassword, setNewPassword] = useState("");
-    const [newCalorieLimit, setNewCalorieLimit] = useState("");
+    const [newCalorieLimit, setNewCalorieLimit] = useState(props.calorieLimit);
     const history = useHistory();
 
     async function handleChangeUsername() {

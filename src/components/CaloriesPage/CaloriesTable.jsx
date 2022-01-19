@@ -64,8 +64,8 @@ export default function CaloriesTable(props) {
     return (
         <Grid item xs={12} md={12} lg={12}>
             {showAlert && (
-                <Alert severity="error" sx={{ mb: 1 }}>
-                    Error
+                <Alert severity="error" sx={{ mb: 3 }}>
+                    Error occured
                 </Alert>
             )}
             {showProductChangeForm && (

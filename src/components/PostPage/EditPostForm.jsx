@@ -2,6 +2,8 @@ import { Button, Box, TextField } from "@mui/material";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "../../api/axios";
+import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
+import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
 
 export default function EditPostForm(props) {
     const [newPostTitle, setNewPostTitle] = useState(props.post_title);
@@ -51,6 +53,7 @@ export default function EditPostForm(props) {
                     color="warning"
                     onClick={() => setShowForm(!showForm)}
                 >
+                    <EditOutlinedIcon />
                     Edit post
                 </Button>
                 <Button
@@ -59,6 +62,7 @@ export default function EditPostForm(props) {
                     sx={{ ml: 1 }}
                     onClick={() => handleDeletePost()}
                 >
+                    <DeleteForeverOutlinedIcon />
                     Delete post
                 </Button>
             </Box>
@@ -91,17 +95,16 @@ export default function EditPostForm(props) {
                     />
                     <Button
                         variant="contained"
-                        color="info"
+                        color="success"
                         onClick={() => {
                             handleEditPostTitle();
                             handleEditPostText();
                         }}
                     >
-                        Accept changes
+                        Submit
                     </Button>
                     <Button
                         variant="contained"
-                        color="error"
                         sx={{ ml: 1 }}
                         onClick={() => setShowForm(false)}
                     >

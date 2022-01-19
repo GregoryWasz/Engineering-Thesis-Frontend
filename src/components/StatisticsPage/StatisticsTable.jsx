@@ -23,7 +23,6 @@ export default function StatisticsTable(props) {
                 weight_amount: weightAmount,
             })
             .then((response) => {
-                setWeightAmount();
                 props.getBodyWeights();
                 setShowWeightAmountFrom(false);
                 setShowAlert(false);
@@ -48,7 +47,7 @@ export default function StatisticsTable(props) {
     return (
         <Grid item xs={12} md={12} lg={12}>
             {showAlert && (
-                <Alert sx={{ mb: 1 }} severity="error">
+                <Alert sx={{ mb: 3 }} severity="error">
                     Error occured
                 </Alert>
             )}
@@ -59,7 +58,8 @@ export default function StatisticsTable(props) {
                         name="weight"
                         fullWidth
                         id="weight"
-                        label="New weight"
+                        label="Edit weight"
+                        value={weightAmount}
                         autoFocus
                         type="number"
                         onChange={(e) => setWeightAmount(e.target.value)}
@@ -76,7 +76,9 @@ export default function StatisticsTable(props) {
                         <Button
                             variant="contained"
                             sx={{ ml: 2 }}
-                            onClick={(e) => setShowWeightAmountFrom(false)}
+                            onClick={(e) =>
+                                setShowWeightAmountFrom(!showWeightAmountForm)
+                            }
                         >
                             Cancel
                         </Button>
@@ -121,6 +123,7 @@ export default function StatisticsTable(props) {
                                         sx={{ m: 0.1 }}
                                         onClick={(e) => {
                                             setShowWeightAmountFrom(true);
+                                            setWeightAmount(row.weight_amount);
                                             setRowId(
                                                 row.body_weight_measure_id,
                                             );

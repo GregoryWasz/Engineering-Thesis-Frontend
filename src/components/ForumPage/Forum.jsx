@@ -32,23 +32,21 @@ export default function Forum() {
         getPosts();
     }, []);
     return (
-        <>
-            <Box sx={{ display: "flex" }}>
-                <CssBaseline />
-                <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-                    <Grid container spacing={3}>
-                        <CreatePostForm getPosts={getPosts} />
-                        {posts.map((post) => (
-                            <PostItem
-                                key={post.post_id}
-                                post={post}
-                                currentUserID={currentUserID}
-                                getPosts={getPosts}
-                            />
-                        ))}
-                    </Grid>
-                </Container>
-            </Box>
-        </>
+        <Box sx={{ display: "flex", bgcolor: "#f5f5f5" }}>
+            <CssBaseline />
+            <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+                <Grid container spacing={3}>
+                    <CreatePostForm getPosts={getPosts} />
+                    {posts.map((post) => (
+                        <PostItem
+                            key={post.post_id}
+                            post={post}
+                            currentUserID={currentUserID}
+                            getPosts={getPosts}
+                        />
+                    ))}
+                </Grid>
+            </Container>
+        </Box>
     );
 }

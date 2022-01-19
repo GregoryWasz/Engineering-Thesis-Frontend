@@ -14,8 +14,6 @@ import Calories from "./components/CaloriesPage/Calories";
 import Forum from "./components/ForumPage/Forum";
 import SinglePostPage from "./components/PostPage/SinglePostPage";
 import User from "./components/UserPage/User";
-
-import { ThemeProvider, createTheme } from "@mui/material/styles";
 import {
     signUpPagePath,
     notFoundPagePath,
@@ -27,14 +25,6 @@ import {
     forumPostPagePath,
 } from "./components/Consts/paths";
 
-const themeLight = createTheme({
-    palette: {
-        background: {
-            default: "#f5f5f5",
-        },
-    },
-});
-
 function App() {
     return (
         <Router>
@@ -45,36 +35,34 @@ function App() {
                 <Route exact path={signUpPagePath}>
                     <SignUp />
                 </Route>
-                <ThemeProvider theme={themeLight}>
-                    <Switch>
-                        <Route path={caloriesPagePath}>
-                            <Header />
-                            <Calories />
-                        </Route>
-                        <Route path={statisticsPagePath}>
-                            <Header />
-                            <Statistics />
-                        </Route>
-                        <Route exact path={forumPagePath}>
-                            <Header />
-                            <Forum />
-                        </Route>
-                        <Route exact path={forumPostPagePath}>
-                            <Header />
-                            <SinglePostPage />
-                        </Route>
-                        <Route path={userPagePath}>
-                            <Header />
-                            <User />
-                        </Route>
-                        <Route path={notFoundPagePath}>
-                            <NotFound />
-                        </Route>
-                        <Route>
-                            <Redirect to={notFoundPagePath} />
-                        </Route>
-                    </Switch>
-                </ThemeProvider>
+                <Switch>
+                    <Route path={caloriesPagePath}>
+                        <Header />
+                        <Calories />
+                    </Route>
+                    <Route path={statisticsPagePath}>
+                        <Header />
+                        <Statistics />
+                    </Route>
+                    <Route exact path={forumPagePath}>
+                        <Header />
+                        <Forum />
+                    </Route>
+                    <Route exact path={forumPostPagePath}>
+                        <Header />
+                        <SinglePostPage />
+                    </Route>
+                    <Route path={userPagePath}>
+                        <Header />
+                        <User />
+                    </Route>
+                    <Route path={notFoundPagePath}>
+                        <NotFound />
+                    </Route>
+                    <Route>
+                        <Redirect to={notFoundPagePath} />
+                    </Route>
+                </Switch>
             </Switch>
         </Router>
     );

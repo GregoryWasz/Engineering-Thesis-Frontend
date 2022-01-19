@@ -52,27 +52,25 @@ export default function Calories() {
     }, [currentDate]);
 
     return (
-        <>
-            <Box sx={{ display: "flex" }}>
-                <CssBaseline />
-                <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-                    <Grid container spacing={3}>
-                        <AddProductsComp
-                            currentDate={currentDate}
-                            getProductsTable={getProductsTable}
-                        />
-                        <Resume
-                            calculateCaloriesEaten={calculateCaloriesEaten}
-                            calorieLimit={calorieLimit}
-                        />
-                        <DatePickerComp setDate={setDate} />
-                        <CaloriesTable
-                            products={products}
-                            getProductsTable={getProductsTable}
-                        />
-                    </Grid>
-                </Container>
-            </Box>
-        </>
+        <Box sx={{ display: "flex", bgcolor: "#f5f5f5" }}>
+            <CssBaseline />
+            <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+                <Grid container spacing={3}>
+                    <AddProductsComp
+                        currentDate={currentDate}
+                        getProductsTable={getProductsTable}
+                    />
+                    <Resume
+                        calculateCaloriesEaten={calculateCaloriesEaten}
+                        calorieLimit={calorieLimit}
+                    />
+                    <DatePickerComp setDate={setDate} />
+                    <CaloriesTable
+                        products={products}
+                        getProductsTable={getProductsTable}
+                    />
+                </Grid>
+            </Container>
+        </Box>
     );
 }

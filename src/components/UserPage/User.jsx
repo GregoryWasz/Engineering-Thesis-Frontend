@@ -59,72 +59,73 @@ export default function User() {
         getAchievements();
     }, []);
     return (
-        <>
-            <Box sx={{ display: "flex" }}>
-                <CssBaseline />
-                <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-                    <Grid container spacing={3}>
-                        <UserBasicInformations
-                            username={username}
-                            email={email}
-                            calorieLimit={calorieLimit}
-                        />
-                        <UserChangeButtons getUser={getUser} />
+        <Box sx={{ display: "flex", bgcolor: "#f5f5f5", minHeight: "100%" }}>
+            <CssBaseline />
+            <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+                <Grid container spacing={3}>
+                    <UserBasicInformations
+                        username={username}
+                        email={email}
+                        calorieLimit={calorieLimit}
+                    />
+                    <UserChangeButtons
+                        getUser={getUser}
+                        calorieLimit={calorieLimit}
+                    />
 
-                        <Grid item xs={12} md={12} lg={12}>
-                            <Paper
-                                sx={{
-                                    p: 2,
-                                    display: "flex",
-                                    flexDirection: "column",
-                                }}
+                    <Grid item xs={12} md={12} lg={12}>
+                        <Paper
+                            sx={{
+                                p: 2,
+                                display: "flex",
+                                flexDirection: "column",
+                            }}
+                        >
+                            <Button
+                                variant="contained"
+                                onClick={handleCheckAchievements}
                             >
-                                <Button
-                                    variant="contained"
-                                    onClick={handleCheckAchievements}
-                                >
-                                    Check achievements!
-                                </Button>
-                                {showAlert && (
-                                    <Alert sx={{ mt: 1.5 }} severity="info">
-                                        {alertText}
-                                    </Alert>
-                                )}
-                            </Paper>
-                        </Grid>
-                        <Grid item xs={12} md={12} lg={12}>
-                            <Paper
-                                sx={{
-                                    p: 2,
-                                    display: "flex",
-                                    flexDirection: "column",
-                                }}
-                            >
-                                <Typography
-                                    variant="h5"
-                                    sx={{ textAlign: "center" }}
-                                >
-                                    Your achevements are listed below
-                                </Typography>
-                            </Paper>
-                        </Grid>
-                        {achievements.map((achievement) => {
-                            const {
-                                achievement_name,
-                                achievement_date,
-                                achievement_id,
-                            } = achievement;
-                            return (
-                                <AchievementItem
-                                    key={achievement_id}
-                                    title={achievement_name}
-                                    date={achievement_date}
-                                />
-                            );
-                        })}
+                                Check achievements!
+                            </Button>
+                            {showAlert && (
+                                <Alert sx={{ mt: 1.5 }} severity="info">
+                                    {alertText}
+                                </Alert>
+                            )}
+                        </Paper>
                     </Grid>
-                </Container>
-            </Box>
-        </>
+                    <Grid item xs={12} md={12} lg={12}>
+                        <Paper
+                            sx={{
+                                p: 2,
+                                display: "flex",
+                                flexDirection: "column",
+                            }}
+                        >
+                            <Typography
+                                variant="h5"
+                                sx={{ textAlign: "center" }}
+                            >
+                                Your achevements are listed below
+                            </Typography>
+                        </Paper>
+                    </Grid>
+                    {achievements.map((achievement) => {
+                        const {
+                            achievement_name,
+                            achievement_date,
+                            achievement_id,
+                        } = achievement;
+                        return (
+                            <AchievementItem
+                                key={achievement_id}
+                                title={achievement_name}
+                                date={achievement_date}
+                            />
+                        );
+                    })}
+                </Grid>
+            </Container>
+        </Box>
     );
 }

@@ -63,7 +63,9 @@ export default function Statistics() {
     }, []);
     return (
         <>
-            <Box sx={{ display: "flex" }}>
+            <Box
+                sx={{ display: "flex", bgcolor: "#f5f5f5", minHeight: "100%" }}
+            >
                 <CssBaseline />
                 <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
                     {showAlert && (
