@@ -12,7 +12,7 @@ export default function Forum() {
     const [posts, setPosts] = useState([]);
 
     async function getUser() {
-        /* Odwołanie bezpośrednie do aplikacji serwerowej w celu zautoryzowania uytkownika */
+        /* Odwołanie bezpośrednie do aplikacji serwerowej w celu zautoryzowania użytkownika */
         await axios
             .get("/auth/me")
             .then((response) => {

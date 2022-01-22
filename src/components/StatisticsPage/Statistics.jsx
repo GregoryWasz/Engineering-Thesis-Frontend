@@ -14,14 +14,14 @@ import StatisticsTable from "./StatisticsTable";
 import axios from "../../api/axios";
 
 export default function Statistics() {
-    /* Wyświetlanie strony ze statystykami pomiarów masy ciała uzytkownika oraz formularza */
+    /* Wyświetlanie strony ze statystykami pomiarów masy ciała użytkownika oraz formularza */
     const [bodyWeights, setBodyWeights] = useState([]);
     const [showAddBodyWeightForm, setShowAddBodyWeightForm] = useState(false);
     const [bodyWeight, setBodyWeight] = useState("");
     const [showAlert, setShowAlert] = useState();
 
     async function handleAddBodyWeight() {
-        /* Odwołanie bezpośrednie do aplikacji serwerowej w celu dodania pomiaru masy ciała uzytkownika */
+        /* Odwołanie bezpośrednie do aplikacji serwerowej w celu dodania pomiaru masy ciała użytkownika */
         var current_date = new Date().toISOString();
         await axios
             .post("/body_weights", {
@@ -40,7 +40,7 @@ export default function Statistics() {
     }
 
     async function getBodyWeights() {
-        /* Odwołanie bezpośrednie do aplikacji serwerowej w celu pobrania pomiaru masy ciała uzytkownika*/
+        /* Odwołanie bezpośrednie do aplikacji serwerowej w celu pobrania pomiaru masy ciała użytkownika*/
         await axios
             .get("/body_weights")
             .then((response) => {

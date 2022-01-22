@@ -19,7 +19,7 @@ export default function Header() {
     const history = useHistory();
 
     async function handleLogout(e) {
-        /* Usunięcie magazunu lokalnego i przeierowanie na stronę główną w celu wylogowania uzytkownika */
+        /* Usunięcie magazunu lokalnego i przeierowanie na stronę główną w celu wylogowania użytkownika */
         e.preventDefault();
         localStorage.removeItem("bearer");
         history.push(signInPagePath);

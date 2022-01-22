@@ -22,7 +22,7 @@ export default function UserChangeButtons(props) {
     const history = useHistory();
 
     async function handleChangeUsername() {
-        /* Odwołanie bezpośrednie do aplikacji serwerowej w celu zmiany nazwy uzytkownika */
+        /* Odwołanie bezpośrednie do aplikacji serwerowej w celu zmiany nazwy użytkownika */
         setShowAlert(false);
         await axios
             .put("/users/username", { username: newUsername })
@@ -35,7 +35,7 @@ export default function UserChangeButtons(props) {
             });
     }
     async function handleChangeEmail() {
-        /* Odwołanie bezpośrednie do aplikacji serwerowej w celu zmiany adresu email uzytkownika */
+        /* Odwołanie bezpośrednie do aplikacji serwerowej w celu zmiany adresu email użytkownika */
         setShowAlert(false);
         await axios
             .put("/users/email", { email: newEmail })
@@ -48,7 +48,7 @@ export default function UserChangeButtons(props) {
             });
     }
     async function handleChangePassword() {
-        /* Odwołanie bezpośrednie do aplikacji serwerowej w celu zmiany hasła uzytkownika */
+        /* Odwołanie bezpośrednie do aplikacji serwerowej w celu zmiany hasła użytkownika */
         setShowAlert(false);
         await axios
             .put("/users/password", { password: newPassword })
@@ -61,7 +61,7 @@ export default function UserChangeButtons(props) {
             });
     }
     async function handleCalorieLimit() {
-        /* Odwołanie bezpośrednie do aplikacji serwerowej w celu zmiany dziennego limitu kalorycznego uzytkownika */
+        /* Odwołanie bezpośrednie do aplikacji serwerowej w celu zmiany dziennego limitu kalorycznego użytkownika */
         setShowAlert(false);
         await axios
             .put("/users/calorie", { calorie_limit: newCalorieLimit })
@@ -75,7 +75,7 @@ export default function UserChangeButtons(props) {
             });
     }
     async function handleDeleteAccount() {
-        /* Odwołanie bezpośrednie do aplikacji serwerowej w celu usunięcia uzytkownika */
+        /* Odwołanie bezpośrednie do aplikacji serwerowej w celu usunięcia użytkownika */
         setShowAlert(false);
         await axios
             .delete("/users")

@@ -31,7 +31,7 @@ export default function SinglePostPage() {
     }
 
     async function getUser() {
-        /* Odwołanie bezpośrednie do aplikacji serwerowej w celu pobrania identyfikatora uzytkownika */
+        /* Odwołanie bezpośrednie do aplikacji serwerowej w celu pobrania identyfikatora użytkownika */
         await axios
             .get("/auth/me")
             .then((response) => {

@@ -12,14 +12,14 @@ import { Alert, Button, Grid, TextField } from "@mui/material";
 import axios from "../../api/axios";
 
 export default function StatisticsTable(props) {
-    /* Wyswietlenie tabeli zawierającej pomiary masy ciała uzytkownika */
+    /* Wyswietlenie tabeli zawierającej pomiary masy ciała użytkownika */
     const [weightAmount, setWeightAmount] = useState();
     const [showWeightAmountForm, setShowWeightAmountFrom] = useState(false);
     const [rowId, setRowId] = useState();
     const [showAlert, setShowAlert] = useState();
 
     async function handleUpdateBodyWeight() {
-        /* Odwołanie bezpośrednie do aplikacji serwerowej w celu edycji pomiaru masy ciała uzytkownika */
+        /* Odwołanie bezpośrednie do aplikacji serwerowej w celu edycji pomiaru masy ciała użytkownika */
         await axios
             .put("/body_weights/weight/" + rowId, {
                 weight_amount: weightAmount,
@@ -35,7 +35,7 @@ export default function StatisticsTable(props) {
     }
 
     async function handleDeleteBodyWeight(id) {
-        /* Odwołanie bezpośrednie do aplikacji serwerowej w celu usunięcia pomiaru masy ciała uzytkownika */
+        /* Odwołanie bezpośrednie do aplikacji serwerowej w celu usunięcia pomiaru masy ciała użytkownika */
         await axios
             .delete("/body_weights/" + id)
             .then((response) => {

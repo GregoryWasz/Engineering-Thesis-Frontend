@@ -28,7 +28,7 @@ export default function SignUp() {
     const history = useHistory();
 
     async function handleSignUp(e) {
-        /* Odwołanie bezpośrednie do aplikacji serwerowej w celu próby rejestracji uzytkownika */
+        /* Odwołanie bezpośrednie do aplikacji serwerowej w celu próby rejestracji użytkownika */
         e.preventDefault();
         setIsError(false);
 

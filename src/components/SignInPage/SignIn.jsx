@@ -28,7 +28,7 @@ export default function SignIn() {
     const history = useHistory();
 
     async function handleSignIn(e) {
-        /* Odwołanie bezpośrednie do aplikacji serwerowej w celu próby logowania uzytkownika */
+        /* Odwołanie bezpośrednie do aplikacji serwerowej w celu próby logowania użytkownika */
         e.preventDefault();
         setIsError(false);
 
