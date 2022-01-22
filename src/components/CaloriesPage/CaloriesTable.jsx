@@ -13,6 +13,7 @@ import Grid from "@mui/material/Grid";
 import axios from "../../api/axios";
 
 export default function CaloriesTable(props) {
+    /* Wyświetlanie tabeli zawierającej produkty */
     const [productId, setProductId] = useState();
     const [showProductChangeForm, setShowProductChangeForm] = useState(false);
     const [showAlert, setShowAlert] = useState(false);
@@ -20,6 +21,7 @@ export default function CaloriesTable(props) {
     const [productCalorificValue, setProductCalorificValue] = useState("");
 
     function prepareDate(date) {
+        /* Obsługa błedu daty */
         try {
             return date.replace("T", " ").slice(0, -3);
         } catch (TypeError) {
@@ -28,6 +30,7 @@ export default function CaloriesTable(props) {
     }
 
     async function handleEditProduct() {
+        /* Odwołanie bezpośrednie do aplikacji serwerowej w celu edycji produktu */
         setShowAlert(false);
         await axios
             .put("/products/name/" + productId, { product_name: productName })
@@ -50,6 +53,7 @@ export default function CaloriesTable(props) {
     }
 
     async function handleDeleteProduct(id) {
+        /* Odwołanie bezpośrednie do aplikacji serwerowej w celu usunięcia produktu */
         setShowAlert(false);
         await axios
             .delete("/products/" + id)

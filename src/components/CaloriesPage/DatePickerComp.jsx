@@ -6,6 +6,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { Box } from "@mui/system";
 
 function DatePickerComp(props) {
+    /* Wyświetlanie komponentu do wybierania daty */
     const [startDate, setStartDate] = useState(new Date());
 
     return (

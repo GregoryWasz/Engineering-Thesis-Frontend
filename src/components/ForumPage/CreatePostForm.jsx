@@ -4,12 +4,14 @@ import { Alert, Button, Paper, TextField, Typography } from "@mui/material";
 import axios from "../../api/axios";
 
 function CreatePostForm(props) {
+    /* Formularz dodający wpis */
     const [showCreatePostForm, setShowCreatePostForm] = useState(false);
     const [showErrorAlert, setShowErrorAlert] = useState(false);
     const [postTitle, setPostTitle] = useState("");
     const [postText, setPostText] = useState("");
 
     async function handleAddPost() {
+        /* Odwołanie bezpośrednie do aplikacji serwerowej w celu dodania wpisu */
         setShowErrorAlert(false);
         await axios
             .post("/posts", {

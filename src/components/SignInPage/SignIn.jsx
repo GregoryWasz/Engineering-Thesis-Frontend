@@ -20,6 +20,7 @@ import axios from "../../api/axios";
 import ErrorAlert from "../CommonComponents/ErrorAlert";
 
 export default function SignIn() {
+    /* Wyświetlanie strony i formularza logowania */
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [isError, setIsError] = useState(false);
@@ -27,6 +28,7 @@ export default function SignIn() {
     const history = useHistory();
 
     async function handleSignIn(e) {
+        /* Odwołanie bezpośrednie do aplikacji serwerowej w celu próby logowania uzytkownika */
         e.preventDefault();
         setIsError(false);
 

@@ -3,6 +3,7 @@ import { Paper, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid";
 
 export default function Resume(props) {
+    /* Wyświetlanie podsumowania dziennego dla uzytkownika*/
     return (
         <Grid item xs={12} md={9} lg={9}>
             <Paper

@@ -7,6 +7,7 @@ import axios from "../../api/axios";
 import { useHistory } from "react-router";
 
 export default function UserChangeButtons(props) {
+    /* Wyświetlanie i obsługa formularzy do zmian informacji o uzytkowniku */
     const [showChangeUsername, setShowChangeUsername] = useState(false);
     const [showChangeEmail, setShowChangeEmail] = useState(false);
     const [showChangePassword, setShowChangePassword] = useState(false);
@@ -21,6 +22,7 @@ export default function UserChangeButtons(props) {
     const history = useHistory();
 
     async function handleChangeUsername() {
+        /* Odwołanie bezpośrednie do aplikacji serwerowej w celu zmiany nazwy uzytkownika */
         setShowAlert(false);
         await axios
             .put("/users/username", { username: newUsername })
@@ -33,6 +35,7 @@ export default function UserChangeButtons(props) {
             });
     }
     async function handleChangeEmail() {
+        /* Odwołanie bezpośrednie do aplikacji serwerowej w celu zmiany adresu email uzytkownika */
         setShowAlert(false);
         await axios
             .put("/users/email", { email: newEmail })
@@ -45,6 +48,7 @@ export default function UserChangeButtons(props) {
             });
     }
     async function handleChangePassword() {
+        /* Odwołanie bezpośrednie do aplikacji serwerowej w celu zmiany hasła uzytkownika */
         setShowAlert(false);
         await axios
             .put("/users/password", { password: newPassword })
@@ -57,6 +61,7 @@ export default function UserChangeButtons(props) {
             });
     }
     async function handleCalorieLimit() {
+        /* Odwołanie bezpośrednie do aplikacji serwerowej w celu zmiany dziennego limitu kalorycznego uzytkownika */
         setShowAlert(false);
         await axios
             .put("/users/calorie", { calorie_limit: newCalorieLimit })
@@ -70,6 +75,7 @@ export default function UserChangeButtons(props) {
             });
     }
     async function handleDeleteAccount() {
+        /* Odwołanie bezpośrednie do aplikacji serwerowej w celu usunięcia uzytkownika */
         setShowAlert(false);
         await axios
             .delete("/users")

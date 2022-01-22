@@ -4,6 +4,7 @@ import Grid from "@mui/material/Grid";
 import axios from "../../api/axios";
 
 function AddProductsComp(props) {
+    /* Wyświetlanie i dodawanie produktów */
     const [productName, setProductName] = useState("");
     const [productCalorificValue, setProductCalorificValue] = useState(0);
     const [showQuickAddProductForm, setShowQuickAddProductForm] =
@@ -14,6 +15,7 @@ function AddProductsComp(props) {
     const [MealWeight, setMealWeight] = useState(0);
 
     async function handleAddProduct(calory) {
+        /* Odwołanie bezpośrednie do aplikacji serwerowej w celu dodania produktu */
         setShowErrorAlert(false);
         await axios
             .post("/products", {

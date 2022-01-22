@@ -6,12 +6,14 @@ import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
 
 export default function EditPostForm(props) {
+    /* Wyświetalnie formularzy do usuwania i edycji wpisu */
     const [newPostTitle, setNewPostTitle] = useState(props.post_title);
     const [newPostText, setNewPostText] = useState(props.post_text);
     const [showForm, setShowForm] = useState(false);
     let history = useHistory();
 
     async function handleEditPostTitle() {
+        /* Odwołanie bezpośrednie do aplikacji serwerowej w celu edycji nagłówka wpisu */
         await axios
             .put("/posts/title/" + props.post_id, {
                 post_title: newPostTitle,
@@ -24,6 +26,7 @@ export default function EditPostForm(props) {
             .catch((error) => {});
     }
     async function handleEditPostText() {
+        /* Odwołanie bezpośrednie do aplikacji serwerowej w celu edycji zawartości wpisu */
         await axios
             .put("/posts/text/" + props.post_id, {
                 post_text: newPostText,
@@ -37,6 +40,7 @@ export default function EditPostForm(props) {
     }
 
     async function handleDeletePost() {
+        /* Odwołanie bezpośrednie do aplikacji serwerowej w celu usunięcia wpisu */
         await axios
             .delete("/posts/" + props.post_id)
             .then((response) => {

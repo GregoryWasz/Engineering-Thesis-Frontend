@@ -7,10 +7,12 @@ import CreatePostForm from "./CreatePostForm";
 import axios from "../../api/axios";
 
 export default function Forum() {
+    /* Wyświetlanie strony forum */
     const [currentUserID, setCurrentUserID] = useState("");
     const [posts, setPosts] = useState([]);
 
     async function getUser() {
+        /* Odwołanie bezpośrednie do aplikacji serwerowej w celu zautoryzowania uytkownika */
         await axios
             .get("/auth/me")
             .then((response) => {
@@ -19,6 +21,7 @@ export default function Forum() {
             .catch((error) => {});
     }
     async function getPosts() {
+        /* Odwołanie bezpośrednie do aplikacji serwerowej w celu pobrania wpisów */
         await axios
             .get("/posts")
             .then((response) => {

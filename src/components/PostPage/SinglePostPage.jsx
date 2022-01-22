@@ -14,12 +14,14 @@ import SingleCommentItem from "./SingleCommentItem";
 import SinglePostItem from "./SinglePostItem";
 
 export default function SinglePostPage() {
+    /* Wyświetlanie podstrony dedykowanej wpisom na forum */
     const { post_id } = useParams();
     const [currentUserID, setCurrentUserID] = useState("");
     const [comments, setComments] = useState([]);
     const [notFoundError, setNotFoundError] = useState(false);
 
     async function getComments() {
+        /* Odwołanie bezpośrednie do aplikacji serwerowej w celu pobrania komentarzy dla konkretnego wpisu */
         await axios
             .get("/comments/" + post_id)
             .then((response) => {
@@ -29,6 +31,7 @@ export default function SinglePostPage() {
     }
 
     async function getUser() {
+        /* Odwołanie bezpośrednie do aplikacji serwerowej w celu pobrania identyfikatora uzytkownika */
         await axios
             .get("/auth/me")
             .then((response) => {

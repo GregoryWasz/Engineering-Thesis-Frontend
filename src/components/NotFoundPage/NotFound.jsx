@@ -9,6 +9,7 @@ import { CardContent } from "@mui/material";
 import React from "react";
 
 export default function NotFound() {
+    /* Wyświetlanie strony z błędem w przypadku nie odnalezienia adresu w aplikacji */
     return (
         <>
             <Container component="main" maxWidth="xs">

@@ -15,6 +15,7 @@ import { Link } from "react-router-dom";
 import StarPurple500OutlinedIcon from "@mui/icons-material/StarPurple500Outlined";
 
 export default function PostItem(props) {
+    /* Wyświetlanie pojedynczego wpisu dla forum */
     const [open, setOpen] = useState(false);
 
     return (

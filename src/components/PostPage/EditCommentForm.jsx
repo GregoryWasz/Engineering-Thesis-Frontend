@@ -5,10 +5,12 @@ import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
 
 export default function EditCommentForm(props) {
+    /* Wyświetlanie formularzy do edycji oraz usuwania komentarzy */
     const [showForm, setShowForm] = useState(false);
     const [newCommentText, setNewCommentText] = useState(props.comment_text);
 
     async function handleEditComment() {
+        /* Odwołanie bezpośrednie do aplikacji serwerowej w celu edycji komentarza */
         await axios
             .put("/comments/text/" + props.comment_id, {
                 comment_text: newCommentText,
@@ -22,6 +24,7 @@ export default function EditCommentForm(props) {
     }
 
     async function handleDeleteComment() {
+        /* Odwołanie bezpośrednie do aplikacji serwerowej w celu usunięcia komentarza */
         await axios
             .delete("/comments/" + props.comment_id)
             .then((response) => {

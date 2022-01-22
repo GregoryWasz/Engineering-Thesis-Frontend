@@ -5,29 +5,20 @@ import axios from "../../api/axios";
 import { useParams } from "react-router-dom";
 
 export default function SinglePostItem(props) {
+    /* Wyświetlanie pojedynczego wpisu na dedykowanej podstronie na forum */
     const [post, setPost] = useState({});
     const [wait, setWait] = useState(true);
     const { post_id } = useParams();
 
-    // async function handleDeletePost() {
-    //     await axios
-    //         .delete("/posts/" + post.post_id)
-    //         .then((response) => {
-    //             getPost();
-    //         })
-    //         .catch((error) => {});
-    // }
-
     async function getPost() {
+        /* Odwołanie bezpośrednie do aplikacji serwerowej w celu pobrania zawartości wpisu */
         await axios
             .get("/posts/" + post_id)
             .then((response) => {
                 setPost(response.data);
                 setWait(false);
             })
-            .catch((error) => {
-                // setNotFoundError(true);
-            });
+            .catch((error) => {});
     }
 
     useEffect(() => {

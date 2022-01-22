@@ -15,9 +15,11 @@ import { signInPagePath } from "../Consts/paths";
 import { useHistory } from "react-router";
 
 export default function Header() {
+    /* Wyświetlanie nagłówka strony */
     const history = useHistory();
 
     async function handleLogout(e) {
+        /* Usunięcie magazunu lokalnego i przeierowanie na stronę główną w celu wylogowania uzytkownika */
         e.preventDefault();
         localStorage.removeItem("bearer");
         history.push(signInPagePath);

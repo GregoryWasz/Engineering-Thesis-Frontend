@@ -15,6 +15,7 @@ import UserChangeButtons from "./UserChangeButtons";
 import axios from "../../api/axios";
 
 export default function User() {
+    /* Wyświetlanie strony zawierającej panel uzytkownika */
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [calorieLimit, setCalorieLimit] = useState("");
@@ -23,6 +24,7 @@ export default function User() {
     const [alertText, setAlertText] = useState("");
 
     async function handleCheckAchievements(e) {
+        /* Odwołanie bezpośrednie do aplikacji serwerowej w celu sprawdzenia informacji o nowych osiągnięciach */
         e.preventDefault();
         setShowAlert(false);
         await axios
@@ -36,6 +38,7 @@ export default function User() {
     }
 
     async function getUser() {
+        /* Odwołanie bezpośrednie do aplikacji serwerowej w celu pobrania informacji na temat uzytkownika */
         await axios
             .get("/auth/me")
             .then((response) => {
@@ -45,7 +48,9 @@ export default function User() {
             })
             .catch((error) => {});
     }
+
     async function getAchievements() {
+        /* Odwołanie bezpośrednie do aplikacji serwerowej w celu pobrania informacji o aktualnie zdonytych osiągnięciach uzytkownika */
         await axios
             .get("/achievements")
             .then((response) => {

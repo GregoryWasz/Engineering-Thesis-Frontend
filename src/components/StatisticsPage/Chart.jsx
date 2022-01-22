@@ -10,6 +10,7 @@ import {
 } from "recharts";
 
 export default function Chart(props) {
+    /* Wyświetlanie wykresu z pomiarami wagi uytkownika */
     var chartData = props.bodyWeights.map((ele) => {
         return {
             weight_amount: ele.weight_amount,

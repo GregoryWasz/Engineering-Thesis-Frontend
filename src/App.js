@@ -26,6 +26,7 @@ import {
 } from "./components/Consts/paths";
 
 function App() {
+    /* Zdefiniowanie adresów podstron aplikacji oraz przypisanie im odpowiednich komponentów */
     return (
         <Router>
             <Switch>

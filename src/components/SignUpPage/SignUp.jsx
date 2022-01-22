@@ -19,6 +19,7 @@ import {
 } from "../Consts/paths";
 
 export default function SignUp() {
+    /* Wyświetlanie strony i formularza rejestracji */
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -27,6 +28,7 @@ export default function SignUp() {
     const history = useHistory();
 
     async function handleSignUp(e) {
+        /* Odwołanie bezpośrednie do aplikacji serwerowej w celu próby rejestracji uzytkownika */
         e.preventDefault();
         setIsError(false);
 

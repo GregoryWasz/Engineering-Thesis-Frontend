@@ -4,11 +4,13 @@ import axios from "../../api/axios";
 import { useParams } from "react-router-dom";
 
 export default function AddCommentForm(props) {
+    /* Wyświetlanie formularza dodawania komentarzy */
     const [commentText, setCommentText] = useState("");
     const [showErrorAlert, setShowErrorAlert] = useState(false);
     const { post_id } = useParams();
 
     async function handleAddComment() {
+        /* Odwołanie bezpośrednie do aplikacji serwerowej w celu dodania komentarza */
         setShowErrorAlert(false);
         await axios
             .post("/comments/" + post_id, {

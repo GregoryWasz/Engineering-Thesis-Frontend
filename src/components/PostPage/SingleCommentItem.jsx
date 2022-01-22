@@ -3,6 +3,7 @@ import EditCommentForm from "./EditCommentForm";
 import { Avatar, Box, Typography, Paper } from "@mui/material";
 
 export default function SingleCommentItem(props) {
+    /* Wyświetlanie pojedynczego komentarza */
     return (
         <Paper sx={{ m: 1, p: 2, display: "flex", flexDirection: "column" }}>
             <Box

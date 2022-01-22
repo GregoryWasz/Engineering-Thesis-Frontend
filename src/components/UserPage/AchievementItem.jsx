@@ -3,6 +3,7 @@ import Grid from "@mui/material/Grid";
 import { Paper, Typography } from "@mui/material";
 
 export default function AchievementItem(props) {
+    /* Wyświetlanie pojedynczego osiągnięcia uzytkownika */
     return (
         <Grid item xs={12} md={4} lg={4}>
             <Paper

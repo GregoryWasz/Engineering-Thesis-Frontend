@@ -9,6 +9,7 @@ import DatePickerComp from "./DatePickerComp";
 import AddProductsComp from "./AddProductsComp";
 
 export default function Calories() {
+    /* Wyświetlanie strony zawierającej produkty */
     const [calorieLimit, setCalorieLimit] = useState();
     const [products, setProducts] = useState([]);
     const [currentDate, setDate] = useState(new Date());
