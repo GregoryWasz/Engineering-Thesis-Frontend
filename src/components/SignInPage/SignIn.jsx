@@ -62,12 +62,15 @@ export default function SignIn() {
     }
 
     return (
-        <>
+        <Box
+            sx={{
+                height: "100vh",
+            }}
+        >
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
                 <Box
                     sx={{
-                        marginTop: 8,
                         display: "flex",
                         flexDirection: "column",
                         alignItems: "center",
@@ -125,6 +128,6 @@ export default function SignIn() {
                     </Box>
                 </Box>
             </Container>
-        </>
+        </Box>
     );
 }
