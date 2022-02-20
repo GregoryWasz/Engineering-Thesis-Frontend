@@ -50,6 +50,7 @@ export default function SignIn() {
                 localStorage.removeItem("bearer");
                 localStorage["bearer"] = "Bearer " + response.data.access_token;
                 history.push(caloriesPagePath);
+                window.location.reload();
             })
             .catch((error) => {
                 setIsError(true);
