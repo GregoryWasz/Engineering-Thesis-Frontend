@@ -1,14 +1,18 @@
-import { Paper, Typography, Box, Avatar } from "@mui/material";
+import { Paper, Typography, Box, Avatar, Button } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import EditPostForm from "./EditPostForm";
+import { useHistory } from "react-router-dom";
 import axios from "../../api/axios";
 import { useParams } from "react-router-dom";
+import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
+import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 
 export default function SinglePostItem(props) {
     /* Wyświetlanie pojedynczego wpisu na dedykowanej podstronie na forum */
     const [post, setPost] = useState({});
     const [wait, setWait] = useState(true);
     const { post_id } = useParams();
+    let history = useHistory();
 
     async function getPost() {
         /* Odwołanie bezpośrednie do aplikacji serwerowej w celu pobrania zawartości wpisu */
@@ -17,6 +21,16 @@ export default function SinglePostItem(props) {
             .then((response) => {
                 setPost(response.data);
                 setWait(false);
+            })
+            .catch((error) => {});
+    }
+
+    async function handleAdminDeletePost() {
+        /* Odwołanie bezpośrednie do aplikacji serwerowej w celu usunięcia wpisu */
+        await axios
+            .delete("/admin/post/" + post_id)
+            .then((response) => {
+                history.push("/forum");
             })
             .catch((error) => {});
     }
@@ -65,7 +79,7 @@ export default function SinglePostItem(props) {
                         </Box>
                         <Typography variant="h4">{post.post_title}</Typography>
                         <Typography>{post.post_text}</Typography>
-                        {props.currentUserID === post.post_creator.user_id ? (
+                        {props.currentUserID === post.post_creator.user_id && (
                             <Box>
                                 <EditPostForm
                                     getPost={getPost}
@@ -74,10 +88,23 @@ export default function SinglePostItem(props) {
                                     post_title={post.post_title}
                                     post_text={post.post_text}
                                     currentUserID={props.currentUserID}
+                                    isAdmin={props.isAdmin}
                                 />
                             </Box>
-                        ) : (
-                            <></>
+                        )}
+                        {props.isAdmin && (
+                            <Box>
+                                <Button
+                                    variant="outlined"
+                                    color="error"
+                                    sx={{ mt: 1 }}
+                                    onClick={() => handleAdminDeletePost()}
+                                >
+                                    <AdminPanelSettingsIcon />
+                                    Admin Delete post
+                                    <DeleteForeverOutlinedIcon />
+                                </Button>
+                            </Box>
                         )}
                     </Paper>
                 </>

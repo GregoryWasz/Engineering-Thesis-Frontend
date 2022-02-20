@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -13,9 +13,12 @@ import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import { signInPagePath } from "../Consts/paths";
 import { useHistory } from "react-router";
+import axios from "../../api/axios";
+import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 
 export default function Header() {
     /* Wyświetlanie nagłówka strony */
+    const [isAdmin, setIsAdmin] = useState(false);
     const history = useHistory();
 
     async function handleLogout(e) {
@@ -24,6 +27,20 @@ export default function Header() {
         localStorage.removeItem("bearer");
         history.push(signInPagePath);
     }
+
+    async function getUser() {
+        /* Odwołanie bezpośrednie do aplikacji serwerowej w celu zautoryzowania użytkownika */
+        await axios
+            .get("/auth/me")
+            .then((response) => {
+                setIsAdmin(response.data.admin);
+            })
+            .catch((error) => {});
+    }
+
+    useEffect(() => {
+        getUser();
+    }, []);
 
     return (
         <Box sx={{ flexGrow: 1 }}>
@@ -84,8 +101,8 @@ export default function Header() {
                             edge="start"
                             color="inherit"
                             aria-label="menu"
-                            sx={{ justifyContent: "flex-end" }}
                             href="/statistics"
+                            sx={{ mr: 2 }}
                         >
                             <QueryStatsOutlinedIcon />
                             <Typography
@@ -95,6 +112,25 @@ export default function Header() {
                                 Statistics
                             </Typography>
                         </IconButton>
+
+                        {isAdmin && (
+                            <IconButton
+                                size="large"
+                                edge="start"
+                                color="inherit"
+                                aria-label="menu"
+                                href="/admin"
+                                sx={{ mr: 2 }}
+                            >
+                                <AdminPanelSettingsIcon />
+                                <Typography
+                                    sx={{ ml: 1 }}
+                                    display={{ xs: "none", md: "block" }}
+                                >
+                                    Admin Panel
+                                </Typography>
+                            </IconButton>
+                        )}
                     </Box>
 
                     <Box sx={{ flexGrow: 0 }}>

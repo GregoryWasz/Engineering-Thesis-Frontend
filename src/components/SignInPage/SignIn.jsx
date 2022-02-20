@@ -14,6 +14,7 @@ import {
     loginApiPath,
     signUpPagePath,
     somethingWentWrong,
+    raiseTicketPath,
 } from "../Consts/paths";
 import { useHistory } from "react-router";
 import axios from "../../api/axios";
@@ -122,6 +123,11 @@ export default function SignIn() {
                             <Grid item>
                                 <Link href={signUpPagePath} variant="body2">
                                     {"Don't have an account? Sign Up"}
+                                </Link>
+                            </Grid>
+                            <Grid item>
+                                <Link href={raiseTicketPath} variant="body2">
+                                    {"Forget password? Raise ticket"}
                                 </Link>
                             </Grid>
                         </Grid>

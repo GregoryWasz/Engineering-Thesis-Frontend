@@ -14,6 +14,8 @@ import Calories from "./components/CaloriesPage/Calories";
 import Forum from "./components/ForumPage/Forum";
 import SinglePostPage from "./components/PostPage/SinglePostPage";
 import User from "./components/UserPage/User";
+import TicketsPage from "./components/TicketsPage/TicketsPage";
+import AdminPage from "./components/AdminPage/AdminPage";
 import {
     signUpPagePath,
     notFoundPagePath,
@@ -23,6 +25,8 @@ import {
     forumPagePath,
     userPagePath,
     forumPostPagePath,
+    adminPath,
+    raiseTicketPath,
 } from "./components/Consts/paths";
 
 function App() {
@@ -52,6 +56,13 @@ function App() {
                     <Route exact path={forumPostPagePath}>
                         <Header />
                         <SinglePostPage />
+                    </Route>
+                    <Route exact path={adminPath}>
+                        <Header />
+                        <AdminPage />
+                    </Route>
+                    <Route exact path={raiseTicketPath}>
+                        <TicketsPage />
                     </Route>
                     <Route path={userPagePath}>
                         <Header />

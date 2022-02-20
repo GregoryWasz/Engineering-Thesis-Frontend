@@ -8,6 +8,8 @@ export const caloriesPagePath = "/calories";
 export const statisticsPagePath = "/statistics";
 export const userPagePath = "/user";
 export const notFoundPagePath = "/not-found";
+export const adminPath = "/admin";
+export const raiseTicketPath = "/ticket";
 
 // API paths
 /* Stałe definiujące adresy punktów końcowych aplikacji serwerowej */

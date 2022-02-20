@@ -17,6 +17,7 @@ export default function SinglePostPage() {
     /* Wyświetlanie podstrony dedykowanej wpisom na forum */
     const { post_id } = useParams();
     const [currentUserID, setCurrentUserID] = useState("");
+    const [isAdmin, setIsAdmin] = useState(false);
     const [comments, setComments] = useState([]);
     const [notFoundError, setNotFoundError] = useState(false);
 
@@ -36,6 +37,7 @@ export default function SinglePostPage() {
             .get("/auth/me")
             .then((response) => {
                 setCurrentUserID(response.data.user_id);
+                setIsAdmin(response.data.admin);
             })
             .catch((error) => {});
     }
@@ -64,6 +66,7 @@ export default function SinglePostPage() {
             {notFoundError || (
                 <SinglePostItem
                     currentUserID={currentUserID}
+                    isAdmin={isAdmin}
                     setNotFoundError={setNotFoundError}
                 />
             )}
@@ -77,6 +80,7 @@ export default function SinglePostPage() {
                             comment={comment}
                             getComments={getComments}
                             currentUserID={currentUserID}
+                            isAdmin={isAdmin}
                         />
                     ))}
                     <Box sx={{ p: 1 }}>
